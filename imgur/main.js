@@ -14,6 +14,8 @@ function init()
 {
     Imgur.setCredentials(ScreenCloud.getConsumerKey("imgur"), ScreenCloud.getConsumerSecret("imgur"));
     Imgur.setApiKey(ScreenCloud.getApiKey("imgur"));
+    settingsWidget.group_account.button_authorize.clicked.connect(authorizeButtonPressed);
+    settingsWidget.group_account.button_logout.clicked.connect(logoutButtonClicked);
 }
 function loadSettings()
 {
@@ -68,8 +70,6 @@ function setupSettingsUi(preferencesDialog)
 {
     loadSettings();
     settingsWidget.setWindowTitle("Imgur settings");
-    settingsWidget.group_account.button_authorize.clicked.connect(authorizeButtonPressed);
-    settingsWidget.group_account.button_logout.clicked.connect(logoutButtonClicked);
     updateUi();
     settingsWidget.exec();
 }

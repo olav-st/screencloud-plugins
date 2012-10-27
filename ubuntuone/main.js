@@ -12,6 +12,12 @@ var selectFolderWidget = loadUiFile("selectFolder.ui", true);
 function init()
 {
     selectFolderWidget.tree_folders.expanded.connect(loadSubfolders);
+    settingsWidget.group_location.button_selectFolder.clicked.connect(openSelectFolderDialog);
+    settingsWidget.group_account.widget_login.button_login.clicked.connect(loginButtonClicked);
+    settingsWidget.group_account.widget_loggedIn.button_logout.clicked.connect(logoutButtonClicked);
+    settingsWidget.group_location.input_prefix.textEdited.connect(nameFormatEdited);
+    settingsWidget.group_location.input_name.textEdited.connect(nameFormatEdited);
+    settingsWidget.group_location.input_suffix.textEdited.connect(nameFormatEdited);
 }
 function loadSettings()
 {
@@ -76,12 +82,6 @@ function setupSettingsUi(preferencesDialog)
 {
     loadSettings();
     settingsWidget.setWindowTitle("Ubuntu One settings");
-    settingsWidget.group_location.button_selectFolder.clicked.connect(openSelectFolderDialog);
-    settingsWidget.group_account.widget_login.button_login.clicked.connect(loginButtonClicked);
-    settingsWidget.group_account.widget_loggedIn.button_logout.clicked.connect(logoutButtonClicked);
-    settingsWidget.group_location.input_prefix.textEdited.connect(nameFormatEdited);
-    settingsWidget.group_location.input_name.textEdited.connect(nameFormatEdited);
-    settingsWidget.group_location.input_suffix.textEdited.connect(nameFormatEdited);
     //settingsWidget.setParent(preferencesDialog);
     updateSettingsUi();
     nameFormatEdited();
@@ -173,6 +173,7 @@ function loginButtonClicked()
 
 function openSelectFolderDialog()
 {
+    print("openSelectFolderDialog()");
     selectFolderWidget.modal = true;
     //Load root nodes (volumes)
     var volumes = U1.listVolumes();

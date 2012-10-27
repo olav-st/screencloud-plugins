@@ -13,6 +13,8 @@ settingsWidget.accepted.connect(saveSettings);
 function init()
 {
     Dropbox.setCredentials(ScreenCloud.getConsumerKey("dropbox"), ScreenCloud.getConsumerSecret("dropbox"));
+    settingsWidget.group_account.button_authorize.clicked.connect(authorizeButtonPressed);
+    settingsWidget.group_account.button_logout.clicked.connect(logoutButtonClicked);
 }
 function loadSettings()
 {
@@ -58,8 +60,6 @@ function setupSettingsUi(preferencesDialog)
 {
     loadSettings();
     settingsWidget.setWindowTitle("Dropbox settings");
-    settingsWidget.group_account.button_authorize.clicked.connect(authorizeButtonPressed);
-    settingsWidget.group_account.button_logout.clicked.connect(logoutButtonClicked);
     updateUi();
     settingsWidget.exec();
 }
