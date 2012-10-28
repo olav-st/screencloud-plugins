@@ -42,7 +42,7 @@ function loadSettings()
         Dropbox.credentials.tokenSecret = null;
         Dropbox.setCredentials(Dropbox.credentials.consumerKey, Dropbox.credentials.consumerSecret);
     }
-    ScreenCloud.setFilename("Screenshot at " + new Date().format("yyyy-MM-dd hh:mm:ss") + "." + format);
+    ScreenCloud.setFilename("Screenshot at " + new Date().format("yyyy-mm-dd HH:MM:ss") + "." + format);
     ScreenCloud.setConfigured(loggedIn);
 }
 function saveSettings()

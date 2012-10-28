@@ -34,7 +34,7 @@ function loadSettings()
     content_path = settings.value("content_path", "");
     var now = new Date();
     prefixFormat = settings.value("prefix_format",  "");
-    suffixFormat = settings.value("suffix_format", "yyyy-MM-dd hh:mm:ss");
+    suffixFormat = settings.value("suffix_format", "yyyy-mm-dd HH:MM:ss");
     screenshotName = settings.value("name", "Screenshot at ").toString();
     settings.endGroup();
     settings.endGroup();

@@ -46,7 +46,7 @@ function loadSettings()
         Imgur.credentials.tokenSecret = null;
         Imgur.setCredentials(Imgur.credentials.consumerKey, Imgur.credentials.consumerSecret);
     }
-    ScreenCloud.setFilename("Screenshot at " + new Date().format("yyyy-MM-dd hh:mm:ss"));
+    ScreenCloud.setFilename("Screenshot at " + new Date().format("yyyy-mm-dd HH:MM:ss"));
 }
 function saveSettings()
 {
