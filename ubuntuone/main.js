@@ -33,7 +33,7 @@ function loadSettings()
     path = settings.value("path", "");
     content_path = settings.value("content_path", "");
     prefixFormat = settings.value("prefix-format",  "");
-    suffixFormat = settings.value("suffix_format", "yyyy-mm-dd HH:MM:ss");
+    suffixFormat = settings.value("suffix-format", "yyyy-mm-dd HH:MM:ss");
     screenshotName = settings.value("name", "Screenshot at ").toString();
     settings.endGroup();
     settings.endGroup();
