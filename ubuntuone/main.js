@@ -32,8 +32,7 @@ function loadSettings()
 
     path = settings.value("path", "");
     content_path = settings.value("content_path", "");
-    var now = new Date();
-    prefixFormat = settings.value("prefix_format",  "");
+    prefixFormat = settings.value("prefix-format",  "");
     suffixFormat = settings.value("suffix_format", "yyyy-mm-dd HH:MM:ss");
     screenshotName = settings.value("name", "Screenshot at ").toString();
     settings.endGroup();
@@ -59,6 +58,7 @@ function loadSettings()
 function saveSettings()
 {
     path = settingsWidget.group_location.input_folder.text;
+    prefixFormat = settingsWidget.group_location.input_prefix.text;
 
     settings.beginGroup("uploaders");
     settings.beginGroup("ubuntuone");
@@ -134,11 +134,11 @@ function buildFilename(prefixFormat, screenshotName, suffixFormat)
     var suffix = "";
     if(!isBlankOrEmpty(prefixFormat))
     {
-        var prefix = new Date().format(prefixFormat);
+        prefix = new Date().format(prefixFormat);
     }
     if(!isBlankOrEmpty(suffixFormat))
     {
-        var suffix = new Date().format(suffixFormat);
+        suffix = new Date().format(suffixFormat);
     }
     return prefix + screenshotName + suffix + "." + format;
 }
@@ -173,7 +173,6 @@ function loginButtonClicked()
 
 function openSelectFolderDialog()
 {
-    print("openSelectFolderDialog()");
     selectFolderWidget.modal = true;
     //Load root nodes (volumes)
     var volumes = U1.listVolumes();
