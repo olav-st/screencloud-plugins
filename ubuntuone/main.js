@@ -63,6 +63,7 @@ function saveSettings()
     settings.beginGroup("uploaders");
     settings.beginGroup("ubuntuone");
     settings.setValue("configured", loggedIn);
+    ScreenCloud.setConfigured(loggedIn);
     settings.setValue("consumer_key", Security.encrypt(consumerKey));
     settings.setValue("consumer_secret", Security.encrypt(consumerSecret));
     settings.setValue("token", Security.encrypt(token));

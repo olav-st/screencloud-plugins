@@ -55,6 +55,7 @@ function saveSettings()
     settings.setValue("copy_link", !settingsWidget.group_clipboard.radio_dontcopy.checked);
     settings.endGroup(); //dropbox
     settings.endGroup(); //uploaders
+    ScreenCloud.setConfigured(loggedIn);
 }
 function setupSettingsUi(preferencesDialog)
 {

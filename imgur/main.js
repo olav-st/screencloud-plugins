@@ -57,6 +57,7 @@ function saveSettings()
     settings.beginGroup("uploaders");
     settings.beginGroup("imgur");
     settings.setValue("configured", true);
+    ScreenCloud.setConfigured(true);
     settings.setValue("token", Security.encrypt(accessToken));
     settings.setValue("token_secret", Security.encrypt(accessTokenSecret));
     settings.setValue("username", username);
