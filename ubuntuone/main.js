@@ -49,9 +49,13 @@ function loadSettings()
         loggedIn = false;
     }else
     {
-        configured = true;
         loggedIn = true;
+        if(!isBlankOrEmpty(path))
+        {
+            configured = true;
+        }
     }
+    ScreenCloud.setConfigured(configured);
     U1.setCredentials(consumerKey, consumerSecret, token, tokenSecret);
     ScreenCloud.setFilename(buildFilename(prefixFormat, screenshotName, suffixFormat));
 }
@@ -59,11 +63,12 @@ function saveSettings()
 {
     path = settingsWidget.group_location.input_folder.text;
     prefixFormat = settingsWidget.group_location.input_prefix.text;
+    configured = loggedIn && !isBlankOrEmpty(path);
 
     settings.beginGroup("uploaders");
     settings.beginGroup("ubuntuone");
-    settings.setValue("configured", loggedIn);
-    ScreenCloud.setConfigured(loggedIn);
+    settings.setValue("configured", configured);
+    ScreenCloud.setConfigured(configured);
     settings.setValue("consumer_key", Security.encrypt(consumerKey));
     settings.setValue("consumer_secret", Security.encrypt(consumerSecret));
     settings.setValue("token", Security.encrypt(token));
@@ -149,6 +154,13 @@ function loginButtonClicked()
     settingsWidget.group_account.widget_login.button_login.setEnabled(false);
     settingsWidget.group_account.widget_login.button_login.text = "Logging in...";
     credentials = U1.login(settingsWidget.group_account.widget_login.input_email.text, settingsWidget.group_account.widget_login.input_password.text);
+    if(credentials == null || credentials == undefined)
+    {
+        settingsWidget.group_account.widget_login.button_login.setEnabled(true);
+        settingsWidget.group_account.widget_login.button_login.text = "Login";
+        QMessageBox.warning(settingsWidget, "Ubuntu one login", "Failed to login to Ubuntu One. Please check your email and password.");
+        return;
+    }
     token = credentials.oauth_token;
     tokenSecret = credentials.oauth_secret;
     consumerKey = credentials.consumer_key;
@@ -241,6 +253,10 @@ function logoutButtonClicked()
         settings.remove("username");
         settings.endGroup(); //dropbox
         settings.endGroup(); //uploaders
+        settingsWidget.group_account.widget_login.input_password.text = "";
+        settingsWidget.group_account.widget_login.input_email.text = "";
+        settingsWidget.group_account.widget_login.button_login.setEnabled(true);
+        settingsWidget.group_account.widget_login.button_login.text = "Login";
     }
     loadSettings();
     updateSettingsUi();

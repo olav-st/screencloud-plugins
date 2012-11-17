@@ -19,15 +19,20 @@ U1.replyError = function(networkError)
 U1.authRequired = function(request, authenticator)
 {
     print("Auth required");
-    if(isBlankOrEmpty(authenticator.user) || isBlankOrEmpty(authenticator.password))
+    if(!loginAttempted)
     {
         authenticator.setUser(U1.credentials.email);
         authenticator.setPassword(U1.credentials.password);
+        loginAttempted = true;
+    }else
+    {
+        print("Login failed");
     }
 }
 
 U1.netManager.finished.connect(U1.replyFinished);
 U1.netManager.authenticationRequired.connect(U1.authRequired);
+loginAttempted = false;
 
 U1.setCredentials = function(consumerKey, consumerSecret, accessToken, accessTokenSecret) {
     U1.credentials.consumerKey = consumerKey;
@@ -45,6 +50,7 @@ U1.setCredentials = function(consumerKey, consumerSecret, accessToken, accessTok
 }
 U1.getCredentials = function(email, password)
 {
+    loginAttempted = false;
     U1.credentials.email = email;
     U1.credentials.password = password;
     var accesTokenUrl = new QUrl("https://login.ubuntu.com/api/1.0/authentications");
@@ -52,6 +58,7 @@ U1.getCredentials = function(email, password)
     accesTokenUrl.addQueryItem("token_name", "Ubuntu One @ " + QHostInfo.localHostName() + " [ScreenCloud]");
     accessTokenReq = new QNetworkRequest(accesTokenUrl);
     var reply = U1.netManager.get(accessTokenReq);
+    reply.error.connect(U1.replyError);
 
     queryFinished = false;
     queryError = false;
