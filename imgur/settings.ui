@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>267</width>
-    <height>363</height>
+    <width>231</width>
+    <height>402</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Imgur - Settings</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -19,85 +19,99 @@
      <property name="title">
       <string>Account</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QRadioButton" name="radio_anon">
-          <property name="text">
-           <string>Upload anonymously</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radio_account">
-          <property name="text">
-           <string>Use an Imgur account</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_login">
-          <item>
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="button_authorize">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
-            <property name="text">
-             <string>Login on Imgur.com</string>
-            </property>
-            <property name="checkable">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QFormLayout" name="form_loggedIn">
-          <property name="fieldGrowthPolicy">
-           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-          </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_loggedIn">
-            <property name="text">
-             <string>Logged in:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_user">
-            <property name="text">
-             <string>label_email</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QPushButton" name="button_logout">
-            <property name="text">
-             <string>Log out</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
+       <widget class="QRadioButton" name="radio_anon">
+        <property name="text">
+         <string>Upload anonymously</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radio_account">
+        <property name="text">
+         <string>Use an Imgur account</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="button_authenticate">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Login on Imgur.com</string>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="widget_loggedIn" native="true">
+        <layout class="QFormLayout" name="form_loggedIn">
+         <property name="fieldGrowthPolicy">
+          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+         </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_loggedIn">
+           <property name="text">
+            <string>Logged in:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_user">
+           <property name="text">
+            <string>Loading...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QPushButton" name="button_logout">
+           <property name="text">
+            <string>Log out</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="group_name">
+     <property name="title">
+      <string>Name</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_nameFormat">
+        <property name="text">
+         <string>Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="input_name"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_result">
+        <property name="text">
+         <string>Result:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="label_example">
+        <property name="text">
+         <string>example</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -107,34 +121,30 @@
      <property name="title">
       <string>Clipboard</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QRadioButton" name="radio_imgur">
-          <property name="text">
-           <string>Copy imgur link</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radio_directlink">
-          <property name="text">
-           <string>Copy direct link</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="radio_dontcopy">
-          <property name="text">
-           <string>Don't copy link</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QRadioButton" name="radio_imgur">
+        <property name="text">
+         <string>Copy imgur link</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radio_directlink">
+        <property name="text">
+         <string>Copy direct link</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radio_dontcopy">
+        <property name="text">
+         <string>Don't copy link</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -151,6 +161,17 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>radio_anon</tabstop>
+  <tabstop>radio_account</tabstop>
+  <tabstop>button_authenticate</tabstop>
+  <tabstop>button_logout</tabstop>
+  <tabstop>input_name</tabstop>
+  <tabstop>radio_imgur</tabstop>
+  <tabstop>radio_directlink</tabstop>
+  <tabstop>radio_dontcopy</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
@@ -160,8 +181,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>257</x>
-     <y>352</y>
+     <x>222</x>
+     <y>393</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -176,11 +197,11 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>257</x>
-     <y>352</y>
+     <x>222</x>
+     <y>393</y>
     </hint>
     <hint type="destinationlabel">
-     <x>266</x>
+     <x>230</x>
      <y>274</y>
     </hint>
    </hints>
@@ -188,64 +209,16 @@
   <connection>
    <sender>radio_account</sender>
    <signal>toggled(bool)</signal>
-   <receiver>button_logout</receiver>
+   <receiver>button_authenticate</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>247</x>
-     <y>84</y>
+     <x>158</x>
+     <y>78</y>
     </hint>
     <hint type="destinationlabel">
-     <x>246</x>
-     <y>176</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radio_account</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>label_user</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>103</x>
-     <y>84</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>225</x>
-     <y>143</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radio_account</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>button_authorize</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>139</x>
-     <y>84</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>246</x>
-     <y>118</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radio_account</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>label_loggedIn</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>76</x>
-     <y>84</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>65</x>
-     <y>143</y>
+     <x>211</x>
+     <y>103</y>
     </hint>
    </hints>
   </connection>
@@ -260,8 +233,24 @@
      <y>52</y>
     </hint>
     <hint type="destinationlabel">
-     <x>35</x>
-     <y>302</y>
+     <x>73</x>
+     <y>357</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>radio_account</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>widget_loggedIn</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>114</x>
+     <y>75</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>125</x>
+     <y>116</y>
     </hint>
    </hints>
   </connection>
