@@ -1,6 +1,6 @@
 import ScreenCloud
 from PythonQt.QtCore import QFile, QSettings, QUrl
-from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox, QInputDialog
+from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox
 from PythonQt.QtUiTools import QUiLoader
 import dropbox, time, os
 
@@ -8,7 +8,7 @@ class DropboxUploader():
 	def __init__(self):
 		uil = QUiLoader()
 		self.settingsDialog = uil.load(QFile(workingDir + "/settings.ui"))
-		self.settingsDialog.group_account.widget_authorize.button_authenticate.connect("clicked()", self.startAuthenticationProcess)
+		self.settingsDialog.group_account.widget_authenticate.button_authenticate.connect("clicked()", self.startAuthenticationProcess)
 		self.settingsDialog.group_account.widget_loggedIn.button_logout.connect("clicked()", self.logout)
 		self.settingsDialog.group_name.input_nameFormat.connect("textChanged(QString)", self.nameFormatEdited)
 		self.loadSettings()
@@ -25,17 +25,20 @@ class DropboxUploader():
 		self.loadSettings()
 		if not self.access_token:
 			self.settingsDialog.group_account.widget_loggedIn.setVisible(False)
-			self.settingsDialog.group_account.widget_authorize.setVisible(True)
-			self.settingsDialog.group_account.widget_authorize.button_authenticate.setEnabled(True)
+			self.settingsDialog.group_account.widget_authenticate.setVisible(True)
+			self.settingsDialog.group_account.widget_authenticate.button_authenticate.setEnabled(True)
 			self.settingsDialog.group_name.setEnabled(False)
 			self.settingsDialog.group_clipboard.setEnabled(False)
 		else:
 			self.settingsDialog.group_account.widget_loggedIn.setVisible(True)
-			self.settingsDialog.group_account.widget_authorize.setVisible(False)
+			self.settingsDialog.group_account.widget_authenticate.setVisible(False)
 			self.settingsDialog.group_account.widget_loggedIn.label_user.setText(self.display_name)
 			self.settingsDialog.group_name.setEnabled(True)
 			self.settingsDialog.group_clipboard.setEnabled(True)
 
+		self.settingsDialog.group_account.widget_authenticate.label_code.setEnabled(False)
+		self.settingsDialog.group_account.widget_authenticate.input_code.setEnabled(False)
+		self.settingsDialog.group_account.widget_authenticate.button_code.setEnabled(False)
 		self.settingsDialog.group_clipboard.radio_publiclink.setChecked(self.copy_link)
 		self.settingsDialog.group_clipboard.radio_dontcopy.setChecked(not self.copy_link)
 		self.settingsDialog.group_name.input_nameFormat.setText(self.nameFormat)
@@ -95,17 +98,23 @@ class DropboxUploader():
 		self.selectFolderDialog.exec_()
 
 	def startAuthenticationProcess(self):
-		self.settingsDialog.group_account.widget_authorize.button_authenticate.setEnabled(False)
+		self.settingsDialog.group_account.widget_authenticate.button_authenticate.setEnabled(False)
+		self.settingsDialog.group_account.widget_authenticate.label_code.setEnabled(True)
+		self.settingsDialog.group_account.widget_authenticate.input_code.setEnabled(True)
+		self.settingsDialog.group_account.widget_authenticate.button_code.setEnabled(True)
 		self.flow = dropbox.client.DropboxOAuth2FlowNoRedirect('sfacmqvdb9dn66r', 'hx8meda636xgsox')
 		authorize_url = QUrl(self.flow.start())
 		QDesktopServices.openUrl(authorize_url)
-		code = QInputDialog.getText(self.settingsDialog, "Enter Dropbox Code", "Enter the authorization code from the dropbox website:")
+		self.settingsDialog.group_account.widget_authenticate.button_code.connect("clicked()", self.authorizationCodeEntered)
+
+	def authorizationCodeEntered(self):
+		code = self.settingsDialog.group_account.widget_authenticate.input_code.text
 		if code:
 			try:
 				self.access_token, self.user_id = self.flow.finish(code)
 			except dropbox.rest.ErrorResponse:
 				QMessageBox.critical(0, "Failed to authenticate", "Failed to authenticate with Dropbox. Wrong code?")
-				self.settingsDialog.group_account.widget_authorize.input_code.setText("")
+				self.settingsDialog.group_account.widget_authenticate.input_code.setText("")
 				return
 			self.client = dropbox.client.DropboxClient(self.access_token)
 			self.display_name = self.client.account_info()['display_name']
