@@ -35,7 +35,7 @@ class SFTPUploader():
 		settings.beginGroup("uploaders")
 		settings.beginGroup("sftp")
 		self.host = settings.value("host", "")
-		self.port = int(settings.value("port", 21))
+		self.port = int(settings.value("port", 22))
 		self.username = settings.value("username", "")
 		self.password = settings.value("password", "")
 		self.keyfile = settings.value("keyfile", "")
