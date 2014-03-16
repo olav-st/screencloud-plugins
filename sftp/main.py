@@ -90,7 +90,11 @@ class SFTPUploader():
 		tmpFilename = QDesktopServices.storageLocation(QDesktopServices.TempLocation) + "/" + ScreenCloud.formatFilename(str(timestamp))
 		screenshot.save(QFile(tmpFilename), ScreenCloud.getScreenshotFormat())
 		#Connect to server
-		transport = paramiko.Transport((self.host, self.port))
+		try:
+			transport = paramiko.Transport((self.host, self.port))
+		except Exception as e:
+			ScreenCloud.setError(e.message)
+			return False
 		if self.authMethod == "Password":
 			try:
 				transport.connect(username = self.username, password = self.password)
@@ -103,6 +107,12 @@ class SFTPUploader():
 				transport.connect(username=self.username, pkey=private_key)
 			except paramiko.AuthenticationException:
 				ScreenCloud.setError("Authentication failed (key)")
+				return False
+			except paramiko.SSHException as e:
+				ScreenCloud.setError("Error while connecting to " + self.host + ":" + str(self.port) + ". " + e.message)
+				return False
+			except Exception as e:
+				ScreenCloud.setError("Unknown error: " + e.message)
 				return False
 		sftp = paramiko.SFTPClient.from_transport(transport)
 		try:
