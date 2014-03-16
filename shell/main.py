@@ -7,15 +7,15 @@ from collections import defaultdict
 
 class ShellUploader():
 	def __init__(self):
-		uil = QUiLoader()
-		self.settingsDialog = uil.load(QFile(workingDir + "/settings.ui"))
+		self.uil = QUiLoader()
 		
-	def showSettingsUI(self):
+	def showSettingsUI(self, parentWidget):
+		self.parentWidget = parentWidget
+		self.settingsDialog = self.uil.load(QFile(workingDir + "/settings.ui"), parentWidget)
+		self.settingsDialog.connect("accepted()", self.saveSettings)
 		self.loadSettings()
 		self.settingsDialog.group_shell.input_command.text = self.commandFormat
-		self.settingsDialog.exec_()
-		self.commandFormat = self.settingsDialog.group_shell.input_command.text
-		self.saveSettings()
+		self.settingsDialog.open()
 
 	def loadSettings(self):
 		settings = QSettings()
@@ -29,7 +29,7 @@ class ShellUploader():
 		settings = QSettings()
 		settings.beginGroup("uploaders")
 		settings.beginGroup("shell")
-		settings.setValue("command", self.commandFormat)
+		settings.setValue("command", self.settingsDialog.group_shell.input_command.text)
 		settings.endGroup()
 		settings.endGroup()
 	

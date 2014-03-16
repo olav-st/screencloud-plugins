@@ -6,11 +6,13 @@ import ftplib, time
 
 class FTPUploader():
 	def __init__(self):
-		uil = QUiLoader()
-		self.settingsDialog = uil.load(QFile(workingDir + "/settings.ui"))
-		self.settingsDialog.group_location.input_name.connect("textChanged(QString)", self.nameFormatEdited)
+		self.uil = QUiLoader()
 		
-	def showSettingsUI(self):
+	def showSettingsUI(self, parentWidget):
+		self.parentWidget = parentWidget
+		self.settingsDialog = self.uil.load(QFile(workingDir + "/settings.ui"), parentWidget)
+		self.settingsDialog.group_location.input_name.connect("textChanged(QString)", self.nameFormatEdited)
+		self.settingsDialog.connect("accepted()", self.saveSettings)
 		self.loadSettings()
 		self.settingsDialog.group_server.input_host.text = self.host
 		self.settingsDialog.group_server.input_port.value = self.port
@@ -19,8 +21,7 @@ class FTPUploader():
 		self.settingsDialog.group_server.input_url.text = self.url
 		self.settingsDialog.group_location.input_folder.text = self.folder
 		self.settingsDialog.group_location.input_name.text = self.nameFormat
-		if self.settingsDialog.exec_():
-			self.saveSettings()
+		self.settingsDialog.open()
 
 	def loadSettings(self):
 		settings = QSettings()

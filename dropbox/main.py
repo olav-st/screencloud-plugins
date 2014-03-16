@@ -1,25 +1,26 @@
 import ScreenCloud
 from PythonQt.QtCore import QFile, QSettings, QUrl
-from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox, QInputDialog
+from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox
 from PythonQt.QtUiTools import QUiLoader
 import dropbox, time, os
 
 class DropboxUploader():
 	def __init__(self):
-		uil = QUiLoader()
-		self.settingsDialog = uil.load(QFile(workingDir + "/settings.ui"))
-		self.settingsDialog.group_account.widget_authorize.button_authenticate.connect("clicked()", self.startAuthenticationProcess)
-		self.settingsDialog.group_account.widget_loggedIn.button_logout.connect("clicked()", self.logout)
-		self.settingsDialog.group_name.input_nameFormat.connect("textChanged(QString)", self.nameFormatEdited)
+		self.uil = QUiLoader()
 		self.loadSettings()
 		if self.access_token:
 			self.client = dropbox.client.DropboxClient(self.access_token)
 		
-	def showSettingsUI(self):
+	def showSettingsUI(self, parentWidget):
+		self.parentWidget = parentWidget
+		self.settingsDialog = self.uil.load(QFile(workingDir + "/settings.ui"), parentWidget)
+		self.settingsDialog.group_account.widget_authorize.button_authenticate.connect("clicked()", self.startAuthenticationProcess)
+		self.settingsDialog.group_account.widget_loggedIn.button_logout.connect("clicked()", self.logout)
+		self.settingsDialog.group_name.input_nameFormat.connect("textChanged(QString)", self.nameFormatEdited)
+		self.settingsDialog.connect("accepted()", self.saveSettings)
 		self.loadSettings()
 		self.updateUi()
-		if self.settingsDialog.exec_():
-			self.saveSettings()
+		self.settingsDialog.open()
 
 	def updateUi(self):
 		self.loadSettings()
@@ -99,7 +100,7 @@ class DropboxUploader():
 		self.flow = dropbox.client.DropboxOAuth2FlowNoRedirect('sfacmqvdb9dn66r', 'hx8meda636xgsox')
 		authorize_url = QUrl(self.flow.start())
 		QDesktopServices.openUrl(authorize_url)
-		code = QInputDialog.getText(self.settingsDialog, "Enter Dropbox Code", "Enter the authorization code from the dropbox website:")
+		code = raw_input("Enter the authorization code from the dropbox website:")
 		if code:
 			try:
 				self.access_token, self.user_id = self.flow.finish(code)

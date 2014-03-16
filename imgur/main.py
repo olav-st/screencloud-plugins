@@ -1,22 +1,23 @@
 import ScreenCloud
 from PythonQt.QtCore import QFile, QSettings, QUrl
-from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox, QInputDialog
+from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox
 from PythonQt.QtUiTools import QUiLoader
 import pyimgur, time, os
 
 class ImgurUploader():
 	def __init__(self):
-		uil = QUiLoader()
-		self.settingsDialog = uil.load(QFile(workingDir + "/settings.ui"))
+		self.uil = QUiLoader()
+		self.loadSettings()
+		
+	def showSettingsUI(self, parentWidget):
+		self.parentWidget = parentWidget
+		self.settingsDialog = self.uil.load(QFile(workingDir + "/settings.ui"), parentWidget)
 		self.settingsDialog.group_account.button_authenticate.connect("clicked()", self.startAuthenticationProcess)
 		self.settingsDialog.group_account.widget_loggedIn.button_logout.connect("clicked()", self.logOut)
 		self.settingsDialog.group_name.input_name.connect("textChanged(QString)", self.nameFormatEdited)
-		self.loadSettings()
-		
-	def showSettingsUI(self):
+		self.settingsDialog.connect("accepted()", self.saveSettings)
 		self.updateUi()
-		if self.settingsDialog.exec_():
-			self.saveSettings()
+		self.settingsDialog.open()
 
 	def updateUi(self):
 		self.loadSettings()
@@ -104,7 +105,7 @@ class ImgurUploader():
 		self.loadSettings()
 		auth_url = self.imgur.authorization_url('pin')
 		QDesktopServices.openUrl(QUrl(auth_url))
-		pin = QInputDialog.getText(self.settingsDialog, "Enter Imgur PIN", "Enter PIN from imgur website:")
+		pin = raw_input("Enter PIN from imgur website:")
 		if pin:
 			try:
 				self.access_token, self.refresh_token = self.imgur.exchange_pin(pin)
