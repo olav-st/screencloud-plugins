@@ -39,9 +39,9 @@ class ImgurUploader():
 		settings = QSettings()
 		settings.beginGroup("uploaders")
 		settings.beginGroup("imgur")
-		self.uploadAnon = settings.value("anonymous", "true") in ['true']
-		self.copyLink = settings.value("copy-link", "true") in ['true']
-		self.copyDirectLink = settings.value("copy-direct-link", "false") in ['true']
+		self.uploadAnon = settings.value("anonymous", "true") in ['true', True]
+		self.copyLink = settings.value("copy-link", "true") in ['true', True]
+		self.copyDirectLink = settings.value("copy-direct-link", "false") in ['true', True]
 		self.access_token = settings.value("access-token", "")
 		self.refresh_token = settings.value("refresh-token", "")
 		self.nameFormat = settings.value("name-format", "Screenshot at %H:%M:%S")

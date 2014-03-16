@@ -49,7 +49,7 @@ class DropboxUploader():
 		self.access_token = settings.value("access-token", "")
 		self.user_id = settings.value("user-id", "")
 		self.display_name = settings.value("display-name", "")
-		self.copy_link = settings.value("copy-link", "true") in ['true']
+		self.copy_link = settings.value("copy-link", "true") in ['true', True]
 		self.nameFormat = settings.value("name-format", "Screenshot at %H-%M-%S")
 		settings.endGroup()
 		settings.endGroup()
