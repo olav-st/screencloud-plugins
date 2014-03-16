@@ -2,7 +2,7 @@ import ScreenCloud
 from PythonQt.QtCore import QFile, QSettings, QUrl
 from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox, QFileDialog
 from PythonQt.QtUiTools import QUiLoader
-import paramiko, time
+import paramiko, time, sys
 
 class SFTPUploader():
 	def __init__(self):
@@ -121,7 +121,13 @@ class SFTPUploader():
 		self.updateUi()
 
 	def browseForKeyfile(self):
+		if "win" in sys.platform: #Workaround for crash on windows
+			self.parentWidget.hide()
+			self.settingsDialog.hide()
 		filename = QFileDialog.getOpenFileName(self.settingsDialog, "Select Keyfile...", QDesktopServices.storageLocation(QDesktopServices.HomeLocation), "*")
+		if "win" in sys.platform:
+			self.settingsDialog.show()
+			self.parentWidget.show()
 		if filename:
 			self.settingsDialog.group_server.input_keyfile.setText(filename)
 
