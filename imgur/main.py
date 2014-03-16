@@ -1,6 +1,6 @@
 import ScreenCloud
 from PythonQt.QtCore import QFile, QSettings, QUrl
-from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox
+from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox, QInputDialog
 from PythonQt.QtUiTools import QUiLoader
 import pyimgur, time, os
 
@@ -23,23 +23,13 @@ class ImgurUploader():
 		if self.access_token and self.refresh_token:
 			self.settingsDialog.group_account.widget_loggedIn.show()
 			self.settingsDialog.group_account.button_authenticate.hide()
-			self.settingsDialog.group_account.label_code.hide()
-			self.settingsDialog.group_account.input_code.hide()
-			self.settingsDialog.group_account.button_code.hide()
 			self.settingsDialog.group_account.radio_account.setChecked(True)
 			self.settingsDialog.group_account.widget_loggedIn.label_user.setText(self.username)
 		else:
 			self.settingsDialog.group_account.widget_loggedIn.hide()
 			self.settingsDialog.group_account.button_authenticate.show()
-			self.settingsDialog.group_account.label_code.show()
-			self.settingsDialog.group_account.input_code.show()
-			self.settingsDialog.group_account.button_code.show()
 		if self.uploadAnon and self.settingsDialog.group_clipboard.radio_dontcopy.checked:
 			self.settingsDialog.group_clipboard.radio_imgur.setChecked(True)
-
-		self.settingsDialog.group_account.label_code.setEnabled(False)
-		self.settingsDialog.group_account.input_code.setEnabled(False)
-		self.settingsDialog.group_account.button_code.setEnabled(False)
 		self.settingsDialog.group_account.radio_anon.setChecked(self.uploadAnon)
 		self.settingsDialog.group_name.input_name.setText(self.nameFormat)
 		self.settingsDialog.adjustSize()
@@ -112,22 +102,14 @@ class ImgurUploader():
 	def startAuthenticationProcess(self):
 		self.saveSettings()
 		self.loadSettings()
-		self.settingsDialog.group_account.button_authenticate.setEnabled(False)
-		self.settingsDialog.group_account.label_code.setEnabled(True)
-		self.settingsDialog.group_account.input_code.setEnabled(True)
-		self.settingsDialog.group_account.button_code.setEnabled(True)
 		auth_url = self.imgur.authorization_url('pin')
 		QDesktopServices.openUrl(QUrl(auth_url))
-		self.settingsDialog.group_account.button_code.connect("clicked()", self.pinEntered)
-
-	def pinEntered(self):
-		pin = self.settingsDialog.group_account.input_code.text
+		pin = QInputDialog.getText(self.settingsDialog, "Enter Imgur PIN", "Enter PIN from imgur website:")
 		if pin:
 			try:
 				self.access_token, self.refresh_token = self.imgur.exchange_pin(pin)
 			except KeyError as e:
 				QMessageBox.critical(self.settingsDialog, "Imgur key error", "Failed to exchange pin. " + e.message)
-				return
 		self.access_token, self.username = self.imgur.refresh_access_token()
 		self.saveSettings()
 		self.updateUi()
