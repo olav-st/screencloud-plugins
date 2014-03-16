@@ -43,7 +43,7 @@ class SFTPUploader():
 		self.passphrase = settings.value("passphrase", "")
 		self.url = settings.value("url", "")
 		self.folder = settings.value("folder", "")
-		self.nameFormat = settings.value("name-format", "Screenshot at %y-%m-%d")
+		self.nameFormat = settings.value("name-format", "Screenshot at %H-%M-%S")
 		self.authMethod = settings.value("auth-method", "Password")
 		settings.endGroup()
 		settings.endGroup()

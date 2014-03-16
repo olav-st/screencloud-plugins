@@ -33,7 +33,7 @@ class FTPUploader():
 		self.password = settings.value("password", "")
 		self.url = settings.value("url", "")
 		self.folder = settings.value("folder", "")
-		self.nameFormat = settings.value("name-format", "Screenshot at %y-%m-%d")
+		self.nameFormat = settings.value("name-format", "Screenshot at %H-%M-%S")
 		settings.endGroup()
 		settings.endGroup()
 
