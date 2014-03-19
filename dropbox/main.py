@@ -2,7 +2,7 @@ import ScreenCloud
 from PythonQt.QtCore import QFile, QSettings, QUrl
 from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox
 from PythonQt.QtUiTools import QUiLoader
-import dropbox, time, os
+import dropbox, time, os, sys
 
 class DropboxUploader():
 	def __init__(self):
@@ -49,7 +49,7 @@ class DropboxUploader():
 		self.access_token = settings.value("access-token", "")
 		self.user_id = settings.value("user-id", "")
 		self.display_name = settings.value("display-name", "")
-		self.copy_link = settings.value("copy-link", "true") in ['true']
+		self.copy_link = settings.value("copy-link", "true") in ['true', True]
 		self.nameFormat = settings.value("name-format", "Screenshot at %H-%M-%S")
 		settings.endGroup()
 		settings.endGroup()
@@ -104,12 +104,16 @@ class DropboxUploader():
 		if code:
 			try:
 				self.access_token, self.user_id = self.flow.finish(code)
+				self.client = dropbox.client.DropboxClient(self.access_token)
+				self.display_name = self.client.account_info()['display_name']
 			except dropbox.rest.ErrorResponse:
-				QMessageBox.critical(0, "Failed to authenticate", "Failed to authenticate with Dropbox. Wrong code?")
-				self.settingsDialog.group_account.widget_authorize.input_code.setText("")
-				return
-			self.client = dropbox.client.DropboxClient(self.access_token)
-			self.display_name = self.client.account_info()['display_name']
+				if "win" in sys.platform: #Workaround for crash on windows
+					self.parentWidget.hide()
+					self.settingsDialog.hide()
+				QMessageBox.critical(self.settingsDialog, "Failed to authenticate", "Failed to authenticate with Dropbox. Wrong code?")
+				if "win" in sys.platform:
+					self.settingsDialog.show()
+					self.parentWidget.show()
 		self.saveSettings()
 		self.updateUi()
 

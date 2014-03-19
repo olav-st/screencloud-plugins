@@ -172,6 +172,7 @@
   <tabstop>input_username</tabstop>
   <tabstop>input_password</tabstop>
   <tabstop>input_url</tabstop>
+  <tabstop>input_folder</tabstop>
   <tabstop>input_name</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>

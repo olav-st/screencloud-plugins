@@ -147,6 +147,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>button_authenticate</tabstop>
+  <tabstop>button_logout</tabstop>
+  <tabstop>input_nameFormat</tabstop>
+  <tabstop>radio_publiclink</tabstop>
+  <tabstop>radio_dontcopy</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

@@ -134,6 +134,9 @@
         <property name="echoMode">
          <enum>QLineEdit::Password</enum>
         </property>
+        <property name="placeholderText">
+         <string>Optional</string>
+        </property>
        </widget>
       </item>
      </layout>
@@ -223,6 +226,13 @@
   <tabstop>input_host</tabstop>
   <tabstop>input_port</tabstop>
   <tabstop>input_username</tabstop>
+  <tabstop>combo_auth</tabstop>
+  <tabstop>input_password</tabstop>
+  <tabstop>input_keyfile</tabstop>
+  <tabstop>button_browse</tabstop>
+  <tabstop>input_passphrase</tabstop>
+  <tabstop>input_folder</tabstop>
+  <tabstop>input_url</tabstop>
   <tabstop>input_name</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
@@ -235,8 +245,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>236</x>
-     <y>299</y>
+     <x>245</x>
+     <y>381</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
@@ -251,8 +261,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>286</x>
-     <y>299</y>
+     <x>295</x>
+     <y>381</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>

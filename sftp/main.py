@@ -2,7 +2,7 @@ import ScreenCloud
 from PythonQt.QtCore import QFile, QSettings, QUrl
 from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox, QFileDialog
 from PythonQt.QtUiTools import QUiLoader
-import paramiko, time
+import paramiko, time, sys
 
 class SFTPUploader():
 	def __init__(self):
@@ -43,7 +43,7 @@ class SFTPUploader():
 		self.passphrase = settings.value("passphrase", "")
 		self.url = settings.value("url", "")
 		self.folder = settings.value("folder", "")
-		self.nameFormat = settings.value("name-format", "Screenshot at %y-%m-%d")
+		self.nameFormat = settings.value("name-format", "Screenshot at %H-%M-%S")
 		self.authMethod = settings.value("auth-method", "Password")
 		settings.endGroup()
 		settings.endGroup()
@@ -90,7 +90,11 @@ class SFTPUploader():
 		tmpFilename = QDesktopServices.storageLocation(QDesktopServices.TempLocation) + "/" + ScreenCloud.formatFilename(str(timestamp))
 		screenshot.save(QFile(tmpFilename), ScreenCloud.getScreenshotFormat())
 		#Connect to server
-		transport = paramiko.Transport((self.host, self.port))
+		try:
+			transport = paramiko.Transport((self.host, self.port))
+		except Exception as e:
+			ScreenCloud.setError(e.message)
+			return False
 		if self.authMethod == "Password":
 			try:
 				transport.connect(username = self.username, password = self.password)
@@ -103,6 +107,12 @@ class SFTPUploader():
 				transport.connect(username=self.username, pkey=private_key)
 			except paramiko.AuthenticationException:
 				ScreenCloud.setError("Authentication failed (key)")
+				return False
+			except paramiko.SSHException as e:
+				ScreenCloud.setError("Error while connecting to " + self.host + ":" + str(self.port) + ". " + e.message)
+				return False
+			except Exception as e:
+				ScreenCloud.setError("Unknown error: " + e.message)
 				return False
 		sftp = paramiko.SFTPClient.from_transport(transport)
 		try:
@@ -121,7 +131,13 @@ class SFTPUploader():
 		self.updateUi()
 
 	def browseForKeyfile(self):
+		if "win" in sys.platform: #Workaround for crash on windows
+			self.parentWidget.hide()
+			self.settingsDialog.hide()
 		filename = QFileDialog.getOpenFileName(self.settingsDialog, "Select Keyfile...", QDesktopServices.storageLocation(QDesktopServices.HomeLocation), "*")
+		if "win" in sys.platform:
+			self.settingsDialog.show()
+			self.parentWidget.show()
 		if filename:
 			self.settingsDialog.group_server.input_keyfile.setText(filename)
 
