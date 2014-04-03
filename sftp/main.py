@@ -131,13 +131,7 @@ class SFTPUploader():
 		self.updateUi()
 
 	def browseForKeyfile(self):
-		if "win" in sys.platform: #Workaround for crash on windows
-			self.parentWidget.hide()
-			self.settingsDialog.hide()
 		filename = QFileDialog.getOpenFileName(self.settingsDialog, "Select Keyfile...", QDesktopServices.storageLocation(QDesktopServices.HomeLocation), "*")
-		if "win" in sys.platform:
-			self.settingsDialog.show()
-			self.parentWidget.show()
 		if filename:
 			self.settingsDialog.group_server.input_keyfile.setText(filename)
 
