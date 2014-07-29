@@ -1,0 +1,6 @@
+[submodule "imgur/deps/requests"]
+	path = imgur/deps/requests
+	url = https://github.com/kennethreitz/requests.git
+[submodule "imgur/deps/pyimgur"]
+	path = imgur/deps/pyimgur
+	url = https://github.com/Damgaard/PyImgur.git
