@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugins>
+    <plugin>
+        <name>Dropbox</name>
+        <shortname>dropbox</shortname>
+        <description>Upload to your Dropbox folder</description>
+        <author>Olav Sortland Thoresen</author>
+        <version>1.0</version>
+        <category>online</category>
+        <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/dropbox/icon.png</icon>
+        <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
+        <download>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/dropbox/current.zip</download>
+    </plugin>
+    <plugin>
+        <name>Imgur</name>
+        <shortname>imgur</shortname>
+        <description>Upload to imgur.com</description>
+        <author>Olav Sortland Thoresen</author>
+        <version>1.1</version>
+        <category>online</category>
+        <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/imgur/icon.png</icon>
+        <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
+        <download>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/imgur/current.zip</download>
+    </plugin>
+    <plugin>
+        <name>FTP</name>
+        <shortname>ftp</shortname>
+        <description>Upload to custom FTP server</description>
+        <author>Olav Sortland Thoresen</author>
+        <version>1.0</version>
+        <category>online</category>
+        <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/ftp/icon.png</icon>
+        <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
+        <download>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/ftp/current.zip</download>
+    </plugin>
+    <plugin>
+        <name>SFTP</name>
+        <shortname>sftp</shortname>
+        <description>Upload to a secure SFTP server</description>
+        <author>Olav Sortland Thoresen</author>
+        <version>1.1</version>
+        <category>online</category>
+        <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/sftp/icon.png</icon>
+        <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
+        <download>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/sftp/current.zip</download>
+    </plugin>
+    <plugin>
+        <name>Local File</name>
+        <shortname>file</shortname>
+        <description>Save to a file on your computer</description>
+        <author>Olav Sortland Thoresen</author>
+        <version>1.0</version>
+        <category>local</category>
+        <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/file/icon.png</icon>
+        <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
+        <download>https://github.com/olav-st/screencloud-plugins/raw/master/file/current.zip</download>
+    </plugin>
+    <plugin>
+        <name>Shell Script</name>
+        <shortname>shell</shortname>
+        <description>Pass the screenshot to a local shell script</description>
+        <author>Olav Sortland Thoresen</author>
+        <version>1.0</version>
+        <category>local</category>
+        <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/shell/icon.png</icon>
+        <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
+        <download>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/shell/current.zip</download>
+    </plugin>
+</plugins>
