@@ -27,7 +27,7 @@
         <shortname>ftp</shortname>
         <description>Upload to custom FTP server</description>
         <author>Olav Sortland Thoresen</author>
-        <version>1.0</version>
+        <version>1.1</version>
         <category>online</category>
         <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/ftp/icon.png</icon>
         <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
