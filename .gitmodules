@@ -4,3 +4,12 @@
 [submodule "imgur/deps/pyimgur"]
 	path = imgur/deps/pyimgur
 	url = https://github.com/Damgaard/PyImgur.git
+[submodule "dropbox/deps/urllib3"]
+	path = dropbox/deps/urllib3
+	url = https://github.com/shazow/urllib3
+[submodule "sftp/deps/python-ecdsa"]
+	path = sftp/deps/python-ecdsa
+	url = https://github.com/warner/python-ecdsa
+[submodule "sftp/deps/paramiko"]
+	path = sftp/deps/paramiko
+	url = https://github.com/paramiko/paramiko
