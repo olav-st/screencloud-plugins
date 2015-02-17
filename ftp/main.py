@@ -66,7 +66,8 @@ class FTPUploader():
 		tmpFilename = QDesktopServices.storageLocation(QDesktopServices.TempLocation) + "/" + ScreenCloud.formatFilename(str(timestamp))
 		screenshot.save(QFile(tmpFilename), ScreenCloud.getScreenshotFormat())
 
-		ftp = ftplib.FTP(self.host, int(self.port))
+		ftp = ftplib.FTP()
+		ftp.connect(self.host, self.port)
 		ftp.login(self.username, self.password)
 		f = open(tmpFilename, 'rb')
 		try:
