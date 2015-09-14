@@ -16,11 +16,15 @@ class ImgurUploader():
 		self.settingsDialog.group_account.widget_loggedIn.button_logout.connect("clicked()", self.logOut)
 		self.settingsDialog.group_name.input_name.connect("textChanged(QString)", self.nameFormatEdited)
 		self.settingsDialog.connect("accepted()", self.saveSettings)
+		
+		self.loadSettings()
+		self.settingsDialog.group_clipboard.radio_dontcopy.setChecked(not self.copyLink)
+		self.settingsDialog.group_clipboard.radio_directlink.setChecked(self.copyDirectLink)
 		self.updateUi()
 		self.settingsDialog.open()
 
 	def updateUi(self):
-		self.loadSettings()
+		#self.loadSettings()
 		if self.access_token and self.refresh_token:
 			self.settingsDialog.group_account.widget_loggedIn.show()
 			self.settingsDialog.group_account.button_authenticate.hide()
