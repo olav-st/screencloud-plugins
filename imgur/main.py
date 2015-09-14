@@ -86,7 +86,11 @@ class ImgurUploader():
 		self.loadSettings()
 		#Make sure we have a up to date token
 		if not self.uploadAnon:
-			self.imgur.refresh_access_token()
+			try:
+				self.imgur.refresh_access_token()
+			except Exception as e:
+				ScreenCloud.setError("Failed to refresh imgur access token. " + e.message)
+				return False
 		#Save to a temporary file
 		timestamp = time.time()
 		tmpFilename = QDesktopServices.storageLocation(QDesktopServices.TempLocation) + "/" + ScreenCloud.formatFilename(str(timestamp))
