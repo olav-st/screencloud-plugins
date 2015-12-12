@@ -6,7 +6,13 @@ import paramiko, time, sys
 
 class SFTPUploader():
 	def __init__(self):
-		paramiko.util.log_to_file(QDesktopServices.storageLocation(QDesktopServices.TempLocation) + "/screencloud-sftp.log")
+		try:
+			tempLocation = QDesktopServices.storageLocation(QDesktopServices.TempLocation)
+		except AttributeError:
+			from PythonQt.QtCore import QStandardPaths #fix for Qt5
+			tempLocation = QStandardPaths.writableLocation(QStandardPaths.TempLocation)
+
+		paramiko.util.log_to_file(tempLocation + "/screencloud-sftp.log")
 		self.uil = QUiLoader()
 		self.loadSettings()
 		
