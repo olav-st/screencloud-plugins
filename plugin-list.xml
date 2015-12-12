@@ -16,7 +16,7 @@
         <shortname>imgur</shortname>
         <description>Upload to imgur.com</description>
         <author>Olav Sortland Thoresen</author>
-        <version>1.2</version>
+        <version>1.3</version>
         <category>online</category>
         <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/imgur/icon.png</icon>
         <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
@@ -38,7 +38,7 @@
         <shortname>sftp</shortname>
         <description>Upload to a secure SFTP server</description>
         <author>Olav Sortland Thoresen</author>
-        <version>1.1</version>
+        <version>1.2</version>
         <category>online</category>
         <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/sftp/icon.png</icon>
         <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
