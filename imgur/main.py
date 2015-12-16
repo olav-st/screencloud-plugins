@@ -4,6 +4,12 @@ from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox
 from PythonQt.QtUiTools import QUiLoader
 import pyimgur, time, os
 
+###############################
+## This is a temporary fix, should be removed when a newer python version is used ##
+import logging
+logging.captureWarnings(True)
+###############################
+
 class ImgurUploader():
 	def __init__(self):
 		self.uil = QUiLoader()
