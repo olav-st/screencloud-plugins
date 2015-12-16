@@ -45,7 +45,11 @@ class ShellUploader():
 	      
 	def upload(self, screenshot, name):
 		self.loadSettings()
-		tmpFilename = QDesktopServices.storageLocation(QDesktopServices.TempLocation) + "/" + name
+		try:
+			tmpFilename = QDesktopServices.storageLocation(QDesktopServices.TempLocation) + "/" + name
+		except AttributeError:
+			from PythonQt.QtCore import QStandardPaths #fix for Qt5
+			tmpFilename = QStandardPaths.writableLocation(QStandardPaths.TempLocation) + "/" + name
 		screenshot.save(QFile(tmpFilename), ScreenCloud.getScreenshotFormat())
 		command = string.Formatter().vformat(self.commandFormat, (), defaultdict(str, s = tmpFilename))
 		try:

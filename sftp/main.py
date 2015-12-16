@@ -93,7 +93,11 @@ class SFTPUploader():
 		self.loadSettings()
 		#Save to a temporary file
 		timestamp = time.time()
-		tmpFilename = QDesktopServices.storageLocation(QDesktopServices.TempLocation) + "/" + ScreenCloud.formatFilename(str(timestamp))
+		try:
+			tmpFilename = QDesktopServices.storageLocation(QDesktopServices.TempLocation) + "/" + ScreenCloud.formatFilename(str(timestamp))
+		except AttributeError:
+			from PythonQt.QtCore import QStandardPaths #fix for Qt5
+			tmpFilename = QStandardPaths.writableLocation(QStandardPaths.TempLocation) + "/" + ScreenCloud.formatFilename(str(timestamp))
 		screenshot.save(QFile(tmpFilename), ScreenCloud.getScreenshotFormat())
 		#Connect to server
 		try:
