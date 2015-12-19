@@ -6,3 +6,8 @@ $(SUBDIRS):
 	$(MAKE) -C $@
 
 .PHONY: $(SUBDIRS)
+
+test:
+	for dir in $(SUBDIRS); do \
+        $(MAKE) test -C $$dir; \
+    done

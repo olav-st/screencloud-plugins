@@ -1,5 +1,6 @@
 language: generic
 script:
   - make
+  - make test
 os:
   - linux
