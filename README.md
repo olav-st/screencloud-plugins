@@ -1,5 +1,4 @@
-screencloud-plugins
-===================
+# screencloud-plugins [![Build Status](https://travis-ci.org/olav-st/screencloud-plugins.svg)](https://travis-ci.org/olav-st/screencloud-plugins)
 
 "Official" plugins for ScreenCloud.
 
