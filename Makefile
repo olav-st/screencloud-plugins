@@ -9,5 +9,5 @@ $(SUBDIRS):
 
 test:
 	for dir in $(SUBDIRS); do \
-        $(MAKE) test -C $$dir; \
+        ./.travis-version-test.sh $$dir || exit; \
     done
