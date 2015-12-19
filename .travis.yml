@@ -1,0 +1,5 @@
+language: generic
+script:
+  - make
+os:
+  - linux
