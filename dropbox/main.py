@@ -104,7 +104,10 @@ class DropboxUploader():
 		self.flow = dropbox.client.DropboxOAuth2FlowNoRedirect('sfacmqvdb9dn66r', 'hx8meda636xgsox')
 		authorize_url = QUrl(self.flow.start())
 		QDesktopServices.openUrl(authorize_url)
-		code = raw_input("Enter the authorization code from the dropbox website:")
+		try:
+			code = raw_input("Enter the authorization code from the dropbox website:")
+		except NameError:
+			code = input("Enter the authorization code from the dropbox website:")
 		if code:
 			try:
 				self.access_token, self.user_id = self.flow.finish(code)

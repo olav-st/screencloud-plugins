@@ -123,7 +123,10 @@ class ImgurUploader():
 		self.loadSettings()
 		auth_url = self.imgur.authorization_url('pin')
 		QDesktopServices.openUrl(QUrl(auth_url))
-		pin = raw_input("Enter PIN from imgur website:")
+		try:
+			pin = raw_input("Enter PIN from imgur website:")
+		except NameError:
+			pin = input("Enter PIN from imgur website:")
 		if pin:
 			try:
 				self.access_token, self.refresh_token = self.imgur.exchange_pin(pin)
