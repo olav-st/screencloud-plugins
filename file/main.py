@@ -47,7 +47,7 @@ class FileUploader():
 	      
 	def upload(self, screenshot, name):
 		self.loadSettings()
-		f = QFile(self.folder + "/" + ScreenCloud.formatFilename(self.nameFormat))
+		f = QFile(self.folder + "/" + ScreenCloud.formatFilename(name))
 		f.open(QIODevice.WriteOnly)
 		if not f.isWritable():
 			ScreenCloud.setError("File " + f.fileName() + " is not writable!")
