@@ -8,13 +8,14 @@ from collections import defaultdict
 class ShellUploader():
 	def __init__(self):
 		self.uil = QUiLoader()
-		
+
 	def showSettingsUI(self, parentWidget):
 		self.parentWidget = parentWidget
 		self.settingsDialog = self.uil.load(QFile(workingDir + "/settings.ui"), parentWidget)
 		self.settingsDialog.connect("accepted()", self.saveSettings)
 		self.loadSettings()
 		self.settingsDialog.group_shell.input_command.text = self.commandFormat
+		self.settingsDialog.group_shell.output_is_url.checked = self.outputIsUrl
 		self.settingsDialog.open()
 
 	def loadSettings(self):
@@ -22,6 +23,7 @@ class ShellUploader():
 		settings.beginGroup("uploaders")
 		settings.beginGroup("shell")
 		self.commandFormat = settings.value("command", "")
+		self.outputIsUrl = settings.value("copyOutput",str(False)) == "True"
 		settings.endGroup()
 		settings.endGroup()
 
@@ -30,9 +32,10 @@ class ShellUploader():
 		settings.beginGroup("uploaders")
 		settings.beginGroup("shell")
 		settings.setValue("command", self.settingsDialog.group_shell.input_command.text)
+		settings.setValue("copyOutput", str(self.settingsDialog.group_shell.output_is_url.checked))
 		settings.endGroup()
 		settings.endGroup()
-	
+
 	def isConfigured(self):
 		self.loadSettings()
 		if not self.commandFormat:
@@ -42,7 +45,7 @@ class ShellUploader():
 	def getFilename(self):
 		timestamp = time.time()
 		return ScreenCloud.formatFilename(str(timestamp))
-	      
+
 	def upload(self, screenshot, name):
 		self.loadSettings()
 		try:
@@ -58,14 +61,24 @@ class ShellUploader():
 			ScreenCloud.setError("Invalid characters in command '" + command + "'")
 			return False
 		try:
-			p = subprocess.Popen(command.split())
+			if self.outputIsUrl:
+				pipe = subprocess.PIPE
+			else:
+				pipe = None
+
+
+			p = subprocess.Popen(command.split(), stdout=pipe)
 			p.wait()
 			if p.returncode > 0:
 				ScreenCloud.setError("Command " + command + " did not return 0")
 				return False
+			elif self.outputIsUrl:
+				result = p.stdout.read()
+				result = result.strip()
+				ScreenCloud.setUrl(result)
 
 		except OSError:
 			ScreenCloud.setError("Failed to run command " + command)
 			return False
-			
+
 		return True
