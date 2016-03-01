@@ -91,8 +91,8 @@ class DropboxUploader():
 		f.close()
 		os.remove(tmpFilename)
 		if self.copy_link:
-			share = self.client.share('/' + ScreenCloud.formatFilename(name))
-			ScreenCloud.setUrl(share['url'])
+			share = self.client.share('/' + ScreenCloud.formatFilename(name), False)
+			ScreenCloud.setUrl(share['url'].replace('dl=0', 'raw=1'))
 
 		return True
 
