@@ -2,7 +2,7 @@ import ScreenCloud
 from PythonQt.QtCore import QFile, QSettings, QUrl
 from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox, QFileDialog
 from PythonQt.QtUiTools import QUiLoader
-import paramiko, time, sys
+import paramiko, time, sys, os.path
 
 class SFTPUploader():
 	def __init__(self):
