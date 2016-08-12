@@ -13,7 +13,7 @@
 [submodule "sftp/deps/paramiko"]
 	path = sftp/deps/paramiko
 	url = https://github.com/paramiko/paramiko
-[submodule "dropbox/modules/dropbox-sdk-python"]
+[submodule "dropbox/deps/dropbox-sdk-python"]
 	path = dropbox/deps/dropbox-sdk-python
 	url = https://github.com/dropbox/dropbox-sdk-python.git
 [submodule "dropbox/deps/python-six"]
