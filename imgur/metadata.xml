@@ -3,5 +3,5 @@
 	<shortname>imgur</shortname>
 	<className>ImgurUploader</className>
 	<icon>icon.png</icon>
-	<version>1.7</version>
+	<version>1.8</version>
 </metadata>

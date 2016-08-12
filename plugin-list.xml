@@ -5,7 +5,7 @@
         <shortname>dropbox</shortname>
         <description>Upload to your Dropbox folder</description>
         <author>Olav Sortland Thoresen</author>
-        <version>1.4</version>
+        <version>1.5</version>
         <category>online</category>
         <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/dropbox/icon.png</icon>
         <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
@@ -16,7 +16,7 @@
         <shortname>imgur</shortname>
         <description>Upload to imgur.com</description>
         <author>Olav Sortland Thoresen</author>
-        <version>1.7</version>
+        <version>1.8</version>
         <category>online</category>
         <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/imgur/icon.png</icon>
         <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
@@ -38,7 +38,7 @@
         <shortname>sftp</shortname>
         <description>Upload to a secure SFTP server</description>
         <author>Olav Sortland Thoresen</author>
-        <version>1.5</version>
+        <version>1.6</version>
         <category>online</category>
         <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/sftp/icon.png</icon>
         <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
