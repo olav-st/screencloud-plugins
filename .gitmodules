@@ -15,13 +15,13 @@
 	url = https://github.com/paramiko/paramiko
 [submodule "dropbox/modules/dropbox-sdk-python"]
 	path = dropbox/deps/dropbox-sdk-python
-	url = git@github.com:dropbox/dropbox-sdk-python.git
+	url = https://github.com/dropbox/dropbox-sdk-python.git
 [submodule "dropbox/deps/python-six"]
 	path = dropbox/deps/python-six
-	url = git@github.com:JioCloud/python-six.git
+	url = https://github.com/JioCloud/python-six.git
 [submodule "dropbox/deps/requests"]
 	path = dropbox/deps/requests
-	url = git@github.com:kennethreitz/requests.git
+	url = https://github.com/kennethreitz/requests.git
 [submodule "dropbox/deps/pkg_resources"]
 	path = dropbox/deps/pkg_resources
 	url = https://github.com/pypa/pkg_resources
