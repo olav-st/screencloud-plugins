@@ -1,6 +1,8 @@
 SOURCES += modules/dropbox
 SOURCES += modules/urllib3
-SOURCES += modules/pkg_resources.py
+SOURCES += modules/requests
+SOURCES += modules/pkg_resources
+SOURCES += modules/six.py
 SOURCES += icon.png
 SOURCES += main.py
 SOURCES += metadata.xml
