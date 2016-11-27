@@ -1,6 +1,13 @@
 language: generic
+
+before_install:
+  - git submodule update --init
+
 script:
   - make
   - make test
 os:
   - linux
+
+git:
+  submodules: false #we don't want to clone recursively
