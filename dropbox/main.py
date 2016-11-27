@@ -1,14 +1,23 @@
 import ScreenCloud
-from PythonQt.QtCore import QFile, QSettings, QUrl
+from PythonQt.QtCore import QFile, QSettings, QUrl, QDir
 from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox
 from PythonQt.QtUiTools import QUiLoader
-import dropbox, time, os, sys
+import time, os, sys
 
 ###############################
 ## This is a temporary fix, should be removed when a newer python version is used ##
 import logging
 logging.captureWarnings(True)
 ###############################
+
+###############################
+## Another temporary fix to make sure external typing.py is used with python 2 only ##
+if sys.version_info < (3, 0):
+	sys.path.append(ScreenCloud.getPluginDir() + chr(QDir.separator()).join(["", "dropbox", "modules", "py2typing"]))
+###############################
+
+#After sys.path modification
+import dropbox
 
 class DropboxUploader():
 	def __init__(self):

@@ -25,3 +25,6 @@
 [submodule "dropbox/deps/pkg_resources"]
 	path = dropbox/deps/pkg_resources
 	url = https://github.com/pypa/pkg_resources
+[submodule "dropbox/deps/typing"]
+	path = dropbox/deps/typing
+	url = https://github.com/python/typing.git
