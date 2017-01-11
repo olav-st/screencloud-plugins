@@ -7,7 +7,7 @@ import ftplib, time
 class FTPUploader():
 	def __init__(self):
 		self.uil = QUiLoader()
-		
+
 	def showSettingsUI(self, parentWidget):
 		self.parentWidget = parentWidget
 		self.settingsDialog = self.uil.load(QFile(workingDir + "/settings.ui"), parentWidget)
@@ -53,12 +53,12 @@ class FTPUploader():
 	
 	def isConfigured(self):
 		self.loadSettings()
-		return not(not self.host or not self.username or not self.password or not self.folder)
+		return self.host and self.username and self.password and self.folder
 
 	def getFilename(self):
 		self.loadSettings()
 		return ScreenCloud.formatFilename(self.nameFormat)
-	      
+
 	def upload(self, screenshot, name):
 		self.loadSettings()
 
@@ -70,9 +70,7 @@ class FTPUploader():
 			tmpFilename = QStandardPaths.writableLocation(QStandardPaths.TempLocation) + "/" + ScreenCloud.formatFilename(str(timestamp))
 		screenshot.save(QFile(tmpFilename), ScreenCloud.getScreenshotFormat())
 
-		ftp = ftplib.FTP()
-		ftp.connect(self.host, self.port)
-		ftp.login(self.username, self.password)
+		ftp = ftplib.FTP(self.host, self.username, self.password, self.port)
 		f = open(tmpFilename, 'rb')
 		try:
 			ftp.cwd(self.folder)
