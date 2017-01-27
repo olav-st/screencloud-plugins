@@ -67,7 +67,7 @@ class ShellUploader():
 				pipe = None
 
 
-			p = subprocess.Popen(command.split(), stdout=pipe)
+			p = subprocess.Popen(command, shell=True, stdout=pipe)
 			p.wait()
 			if p.returncode > 0:
 				ScreenCloud.setError("Command " + command + " did not return 0")
