@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import subprocess
 import time
 import string
@@ -18,7 +16,7 @@ class ShellUploader():
 
     def showSettingsUI(self, parentWidget):
         self.parentWidget = parentWidget
-        self.settingsDialog = self.uil.load(QFile("/settings.ui"),
+        self.settingsDialog = self.uil.load(QFile(workingDir + "/settings.ui"),
                                             parentWidget)
         self.settingsDialog.connect("accepted()", self.saveSettings)
         self.loadSettings()
