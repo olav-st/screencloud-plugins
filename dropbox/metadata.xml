@@ -3,5 +3,5 @@
 	<shortname>dropbox</shortname>
 	<className>DropboxUploader</className>
 	<icon>icon.png</icon>
-	<version>1.6</version>
+	<version>1.7</version>
 </metadata>
