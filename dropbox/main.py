@@ -24,7 +24,7 @@ class DropboxUploader():
 		self.uil = QUiLoader()
 		self.loadSettings()
 		if self.access_token:
-			self.client = dropbox.client.DropboxClient(self.access_token)
+			self.client = dropbox.Dropbox(self.access_token)
 		
 	def showSettingsUI(self, parentWidget):
 		self.parentWidget = parentWidget
@@ -102,12 +102,12 @@ class DropboxUploader():
 		screenshot.save(QFile(tmpFilename), ScreenCloud.getScreenshotFormat())
 
 		f = open(tmpFilename, 'rb')
-		response = self.client.put_file('/' + ScreenCloud.formatFilename(name), f)
+		response = self.client.files_upload(f, '/' + ScreenCloud.formatFilename(name))
 		f.close()
 		os.remove(tmpFilename)
 		if self.copy_link:
-			share = self.client.share('/' + ScreenCloud.formatFilename(name))
-			ScreenCloud.setUrl(share['url'])
+			share = self.client.sharing_create_shared_link('/' + ScreenCloud.formatFilename(name), short_url=True)
+			ScreenCloud.setUrl(share.url)
 
 		return True
 
