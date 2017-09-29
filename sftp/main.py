@@ -2,7 +2,7 @@ import ScreenCloud
 from PythonQt.QtCore import QFile, QSettings, QUrl
 from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox, QFileDialog
 from PythonQt.QtUiTools import QUiLoader
-import paramiko, time, sys
+import paramiko, time, sys, os.path
 
 class SFTPUploader():
 	def __init__(self):
@@ -15,7 +15,7 @@ class SFTPUploader():
 		paramiko.util.log_to_file(tempLocation + "/screencloud-sftp.log")
 		self.uil = QUiLoader()
 		self.loadSettings()
-		
+
 	def showSettingsUI(self, parentWidget):
 		self.parentWidget = parentWidget
 		self.settingsDialog = self.uil.load(QFile(workingDir + "/settings.ui"), parentWidget)
@@ -80,7 +80,7 @@ class SFTPUploader():
 		self.settingsDialog.group_server.label_passphrase.setVisible(self.authMethod == "Key")
 		self.settingsDialog.group_server.input_passphrase.setVisible(self.authMethod == "Key")
 		self.settingsDialog.adjustSize()
-	
+
 	def isConfigured(self):
 		self.loadSettings()
 		return not(not self.host or not self.username or not (self.password or self.keyfile) or not self.folder)
@@ -88,7 +88,7 @@ class SFTPUploader():
 	def getFilename(self):
 		self.loadSettings()
 		return ScreenCloud.formatFilename(self.nameFormat)
-	      
+
 	def upload(self, screenshot, name):
 		self.loadSettings()
 		#Save to a temporary file
@@ -126,7 +126,16 @@ class SFTPUploader():
 				return False
 		sftp = paramiko.SFTPClient.from_transport(transport)
 		try:
-			sftp.put(tmpFilename, self.folder + "/" + ScreenCloud.formatFilename(name))
+			sftp.chdir(self.folder)
+			(filepath, filename) = os.path.split(ScreenCloud.formatFilename(name))
+			if len(filepath):
+				for folder in filepath.split("/"):
+					try:
+						sftp.mkdir(folder)
+					except IOError:
+						pass
+					sftp.chdir(folder)
+			sftp.put(tmpFilename, ScreenCloud.formatFilename(filename))
 		except IOError:
 			ScreenCloud.setError("Failed to write " + self.folder + "/" + ScreenCloud.formatFilename(name) + ". Check permissions.")
 			return False
