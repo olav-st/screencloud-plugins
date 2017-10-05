@@ -116,7 +116,7 @@ class DropboxUploader():
 
 	def startAuthenticationProcess(self):
 		self.settingsDialog.group_account.widget_authorize.button_authenticate.setEnabled(False)
-		self.flow = dropbox.client.DropboxOAuth2FlowNoRedirect('sfacmqvdb9dn66r', 'hx8meda636xgsox')
+		self.flow = dropbox.oauth.DropboxOAuth2FlowNoRedirect('sfacmqvdb9dn66r', 'hx8meda636xgsox')
 		authorize_url = QUrl(self.flow.start())
 		QDesktopServices.openUrl(authorize_url)
 		try:
@@ -125,10 +125,13 @@ class DropboxUploader():
 			code = input("Enter the authorization code from the dropbox website:")
 		if code:
 			try:
-				self.access_token, self.user_id = self.flow.finish(code)
-				self.client = dropbox.client.DropboxClient(self.access_token)
-				self.display_name = self.client.account_info()['display_name']
-			except dropbox.rest.ErrorResponse:
+				oauth2_result = self.flow.finish(code)
+				self.access_token = oauth2_result.access_token
+				self.client = dropbox.Dropbox(self.access_token)
+				account = self.client.get_current_account()
+				self.user_id = account.account_id
+				self.display_name = account.name.display_name
+			except dropbox.auth.AccessError:
 				if "win" in sys.platform: #Workaround for crash on windows
 					self.parentWidget.hide()
 					self.settingsDialog.hide()
