@@ -128,7 +128,7 @@ class DropboxUploader():
 				oauth2_result = self.flow.finish(code)
 				self.access_token = oauth2_result.access_token
 				self.client = dropbox.Dropbox(self.access_token)
-				account = self.client.get_current_account()
+				account = self.client.users_get_current_account()
 				self.user_id = account.account_id
 				self.display_name = account.name.display_name
 			except dropbox.auth.AccessError:
