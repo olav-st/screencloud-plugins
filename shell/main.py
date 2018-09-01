@@ -1,6 +1,6 @@
 import ScreenCloud
 from PythonQt.QtCore import QFile, QSettings
-from PythonQt.QtGui import QWidget, QDialog, QDesktopServices
+from PythonQt.QtGui import QDQDesktopServices
 from PythonQt.QtUiTools import QUiLoader
 import subprocess, time, string, sys
 from collections import defaultdict
@@ -73,7 +73,7 @@ class ShellUploader():
 				ScreenCloud.setError("Command %s returned %d, but 0 was expected" % (str(command), int(p.returncode)))
 				return False
 			elif self.outputIsUrl:
-				result = str(p.stdout.read())
+				result = bytes.decode(p.stdout.read())
 				result = result.strip()
 				ScreenCloud.setUrl(result)
 
