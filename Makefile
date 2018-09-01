@@ -1,4 +1,4 @@
-SUBDIRS = dropbox file ftp imgur sftp shell
+SUBDIRS = dropbox ftp imgur sftp shell
 
 all: $(SUBDIRS)
 
