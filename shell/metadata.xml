@@ -3,5 +3,5 @@
 	<shortname>shell</shortname>
 	<className>ShellUploader</className>
 	<icon>icon.png</icon>
-	<version>1.4</version>
+	<version>1.5</version>
 </metadata>

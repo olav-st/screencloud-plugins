@@ -49,7 +49,7 @@
         <shortname>shell</shortname>
         <description>Pass the screenshot to a local shell script</description>
         <author>Olav Sortland Thoresen</author>
-        <version>1.4</version>
+        <version>1.5</version>
         <category>local</category>
         <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/shell/icon.png</icon>
         <weblink>https://github.com/olav-st/screencloud-plugins</weblink>

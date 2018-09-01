@@ -1,6 +1,6 @@
 import ScreenCloud
 from PythonQt.QtCore import QFile, QSettings
-from PythonQt.QtGui import QDQDesktopServices
+from PythonQt.QtGui import QDesktopServices
 from PythonQt.QtUiTools import QUiLoader
 import subprocess, time, string, sys
 from collections import defaultdict
