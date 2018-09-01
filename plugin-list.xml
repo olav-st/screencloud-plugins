@@ -45,17 +45,6 @@
         <download>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/sftp/current.zip</download>
     </plugin>
     <plugin>
-        <name>Local File</name>
-        <shortname>file</shortname>
-        <description>Save to a file on your computer</description>
-        <author>Olav Sortland Thoresen</author>
-        <version>1.1</version>
-        <category>local</category>
-        <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/file/icon.png</icon>
-        <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
-        <download>https://github.com/olav-st/screencloud-plugins/raw/master/file/current.zip</download>
-    </plugin>
-    <plugin>
         <name>Shell Script</name>
         <shortname>shell</shortname>
         <description>Pass the screenshot to a local shell script</description>
