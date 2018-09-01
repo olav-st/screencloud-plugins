@@ -70,10 +70,10 @@ class ShellUploader():
 			p = subprocess.Popen(command, shell=True, stdout=pipe)
 			p.wait()
 			if p.returncode > 0:
-				ScreenCloud.setError("Command " + command + " did not return 0")
+				ScreenCloud.setError("Command %s returned %d, but 0 was expected" % (str(command), int(p.returncode)))
 				return False
 			elif self.outputIsUrl:
-				result = p.stdout.read()
+				result = str(p.stdout.read())
 				result = result.strip()
 				ScreenCloud.setUrl(result)
 
