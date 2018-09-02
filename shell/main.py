@@ -75,6 +75,7 @@ class ShellUploader():
 			elif self.outputIsUrl:
 				result = bytes.decode(p.stdout.read())
 				result = result.strip()
+				result = bytes.decode(result)
 				ScreenCloud.setUrl(result)
 
 		except OSError:
