@@ -5,7 +5,7 @@
         <shortname>dropbox</shortname>
         <description>Upload to your Dropbox folder</description>
         <author>Olav Sortland Thoresen</author>
-        <version>1.8</version>
+        <version>1.9</version>
         <category>online</category>
         <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/dropbox/icon.png</icon>
         <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
