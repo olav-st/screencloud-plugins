@@ -2,8 +2,15 @@ SOURCES += modules/dropbox
 SOURCES += modules/urllib3
 SOURCES += modules/requests
 SOURCES += modules/pkg_resources
+SOURCES += modules/certifi
+SOURCES += modules/chardet
+SOURCES += modules/idna
+SOURCES += modules/packaging
+SOURCES += modules/appdirs.py
+SOURCES += modules/pyparsing.py
 SOURCES += modules/six.py
-SOURCES += modules/py2typing/typing.py
+
+
 SOURCES += icon.png
 SOURCES += main.py
 SOURCES += metadata.xml

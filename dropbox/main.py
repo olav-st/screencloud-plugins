@@ -102,7 +102,7 @@ class DropboxUploader():
 		screenshot.save(QFile(tmpFilename), ScreenCloud.getScreenshotFormat())
 
 		f = open(tmpFilename, 'rb')
-		response = self.client.files_upload(f, '/' + ScreenCloud.formatFilename(name))
+		response = self.client.files_upload(f.read(), '/' + ScreenCloud.formatFilename(name))
 		f.close()
 		os.remove(tmpFilename)
 		if self.copy_link:
