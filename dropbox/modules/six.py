@@ -1,1 +1,1 @@
-../deps/python-six/six.py
+../deps/six/six.py
