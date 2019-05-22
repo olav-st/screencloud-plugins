@@ -51,7 +51,7 @@ class SFTPUploader():
 		self.keyfile = settings.value("keyfile", "")
 		self.passphrase = settings.value("passphrase", "")
 		self.url = settings.value("url", "")
-		self.urlExtension = settings.value("url-extension", True, type=bool)
+		self.urlExtension = settings.value("url-extension", "true") == "true"
 		self.folder = settings.value("folder", "")
 		self.nameFormat = settings.value("name-format", "Screenshot at %H-%M-%S")
 		self.authMethod = settings.value("auth-method", "Password")
