@@ -1,5 +1,3 @@
-SOURCES += modules/ecdsa
-SOURCES += modules/paramiko
 SOURCES += icon.png
 SOURCES += main.py
 SOURCES += metadata.xml

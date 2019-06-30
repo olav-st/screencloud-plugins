@@ -2,7 +2,13 @@ import ScreenCloud
 from PythonQt.QtCore import QFile, QSettings, QUrl
 from PythonQt.QtGui import QWidget, QDialog, QDesktopServices, QMessageBox, QFileDialog
 from PythonQt.QtUiTools import QUiLoader
-import paramiko, time, sys, os.path
+import time, sys, os.path, socket
+import ssh2
+from ssh2.session import Session
+from ssh2.sftp import LIBSSH2_FXF_CREAT, LIBSSH2_FXF_WRITE, \
+					  LIBSSH2_SFTP_S_IRUSR, LIBSSH2_SFTP_S_IRGRP, \
+					  LIBSSH2_SFTP_S_IWUSR, LIBSSH2_SFTP_S_IROTH, \
+					  LIBSSH2_SFTP_S_IXUSR
 
 class SFTPUploader():
 	def __init__(self):
@@ -12,7 +18,6 @@ class SFTPUploader():
 			from PythonQt.QtCore import QStandardPaths #fix for Qt5
 			tempLocation = QStandardPaths.writableLocation(QStandardPaths.TempLocation)
 
-		paramiko.util.log_to_file(tempLocation + "/screencloud-sftp.log")
 		self.uil = QUiLoader()
 		self.loadSettings()
 
@@ -101,32 +106,39 @@ class SFTPUploader():
 		screenshot.save(QFile(tmpFilename), ScreenCloud.getScreenshotFormat())
 		#Connect to server
 		try:
-			transport = paramiko.Transport((self.host, self.port))
+			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			sock.connect((self.host, self.port))
+			session = Session()
+			session.handshake(sock)
 		except Exception as e:
 			ScreenCloud.setError(e.message)
 			return False
 		if self.authMethod == "Password":
 			try:
-				transport.connect(username = self.username, password = self.password)
-			except paramiko.AuthenticationException:
+				session.userauth_password(self.username, self.password)
+			except ssh2.exceptions.AuthenticationError:
 				ScreenCloud.setError("Authentication failed (password)")
 				return False
 		else:
 			try:
-				private_key = paramiko.RSAKey.from_private_key_file(self.keyfile, password=self.passphrase)
-				transport.connect(username=self.username, pkey=private_key)
-			except paramiko.AuthenticationException:
+				session.userauth_publickey_fromfile(self.username, self.keyfile, passphrase=self.passphrase)
+			except ssh2.exceptions.AuthenticationError:
 				ScreenCloud.setError("Authentication failed (key)")
-				return False
-			except paramiko.SSHException as e:
-				ScreenCloud.setError("Error while connecting to " + self.host + ":" + str(self.port) + ". " + e.message)
 				return False
 			except Exception as e:
 				ScreenCloud.setError("Unknown error: " + e.message)
 				return False
-		sftp = paramiko.SFTPClient.from_transport(transport)
+		sftp = session.sftp_init()
+		mode = LIBSSH2_SFTP_S_IRUSR | \
+			LIBSSH2_SFTP_S_IWUSR | \
+			LIBSSH2_SFTP_S_IRGRP | \
+			LIBSSH2_SFTP_S_IROTH
+		f_flags = LIBSSH2_FXF_CREAT | LIBSSH2_FXF_WRITE
 		try:
-			sftp.chdir(self.folder)
+			try:
+				sftp.opendir(self.folder)
+			except ssh2.exceptions.SFTPError:
+				sftp.mkdir(self.folder, mode | LIBSSH2_SFTP_S_IXUSR)
 			(filepath, filename) = os.path.split(ScreenCloud.formatFilename(name))
 			if len(filepath):
 				for folder in filepath.split("/"):
@@ -134,13 +146,15 @@ class SFTPUploader():
 						sftp.mkdir(folder)
 					except IOError:
 						pass
-					sftp.chdir(folder)
-			sftp.put(tmpFilename, ScreenCloud.formatFilename(filename))
+			source = tmpFilename
+			destination = self.folder + "/" + ScreenCloud.formatFilename(filename)
+			with open(source, 'rb') as local_fh, sftp.open(destination, f_flags, mode) as remote_fh:
+				for data in local_fh:
+					remote_fh.write(data)
 		except IOError:
 			ScreenCloud.setError("Failed to write " + self.folder + "/" + ScreenCloud.formatFilename(name) + ". Check permissions.")
 			return False
-		sftp.close()
-		transport.close()
+		sock.close()
 		if self.url:
 			ScreenCloud.setUrl(self.url + ScreenCloud.formatFilename(name))
 		return True
