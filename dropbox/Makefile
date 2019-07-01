@@ -1,6 +1,9 @@
+SOURCES += modules/appdirs.py
+SOURCES += modules/chardet
+SOURCES += modules/certifi
 SOURCES += modules/dropbox
-SOURCES += modules/urllib3
-SOURCES += modules/requests
+SOURCES += modules/idna
+SOURCES += modules/packaging
 SOURCES += modules/pkg_resources
 SOURCES += modules/certifi
 SOURCES += modules/chardet

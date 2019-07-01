@@ -6,7 +6,7 @@
 	url = https://github.com/Damgaard/PyImgur.git
 [submodule "dropbox/deps/urllib3"]
 	path = dropbox/deps/urllib3
-	url = https://github.com/shazow/urllib3
+	url = https://github.com/urllib3/urllib3
 [submodule "sftp/deps/python-ecdsa"]
 	path = sftp/deps/python-ecdsa
 	url = https://github.com/warner/python-ecdsa
@@ -16,9 +16,6 @@
 [submodule "dropbox/deps/dropbox-sdk-python"]
 	path = dropbox/deps/dropbox-sdk-python
 	url = https://github.com/dropbox/dropbox-sdk-python.git
-[submodule "dropbox/deps/six"]
-	path = dropbox/deps/six
-	url = https://github.com/benjaminp/six.git
 [submodule "dropbox/deps/requests"]
 	path = dropbox/deps/requests
 	url = https://github.com/kennethreitz/requests.git
@@ -52,3 +49,6 @@
 [submodule "sftp/deps/bcrypt"]
 	path = sftp/deps/bcrypt
 	url = https://github.com/pyca/bcrypt.git
+[submodule "dropbox/deps/six"]
+	path = dropbox/deps/six
+	url = https://github.com/benjaminp/six.git
