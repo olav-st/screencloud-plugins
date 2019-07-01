@@ -43,3 +43,12 @@
 [submodule "dropbox/deps/appdirs"]
 	path = dropbox/deps/appdirs
 	url = https://github.com/ActiveState/appdirs.git
+[submodule "sftp/deps/cryptography"]
+	path = sftp/deps/cryptography
+	url = https://github.com/pyca/cryptography.git
+[submodule "sftp/deps/asn1crypto"]
+	path = sftp/deps/asn1crypto
+	url = https://github.com/wbond/asn1crypto.git
+[submodule "sftp/deps/bcrypt"]
+	path = sftp/deps/bcrypt
+	url = https://github.com/pyca/bcrypt.git
