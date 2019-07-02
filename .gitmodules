@@ -37,6 +37,21 @@
 [submodule "dropbox/deps/pyparsing"]
 	path = dropbox/deps/pyparsing
 	url = https://github.com/pyparsing/pyparsing.git
+[submodule "imgur/deps/urllib3"]
+	path = imgur/deps/urllib3
+	url = https://github.com/urllib3/urllib3
+[submodule "imgur/deps/python-certifi"]
+	path = imgur/deps/python-certifi
+	url = https://github.com/certifi/python-certifi.git
+[submodule "imgur/deps/idna"]
+	path = imgur/deps/idna
+	url = https://github.com/kjd/idna.git
+[submodule "imgur/deps/chardet"]
+	path = imgur/deps/chardet
+	url = https://github.com/chardet/chardet.git
+[submodule "sftp/deps/six"]
+	path = sftp/deps/six
+	url = https://github.com/benjaminp/six.git
 [submodule "dropbox/deps/appdirs"]
 	path = dropbox/deps/appdirs
 	url = https://github.com/ActiveState/appdirs.git

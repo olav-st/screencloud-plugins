@@ -5,11 +5,9 @@ SOURCES += modules/dropbox
 SOURCES += modules/idna
 SOURCES += modules/packaging
 SOURCES += modules/pkg_resources
+SOURCES += modules/requests
+SOURCES += modules/urllib3
 SOURCES += modules/certifi
-SOURCES += modules/chardet
-SOURCES += modules/idna
-SOURCES += modules/packaging
-SOURCES += modules/appdirs.py
 SOURCES += modules/pyparsing.py
 SOURCES += modules/six.py
 
