@@ -106,9 +106,9 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item>
-       <widget class="QCheckBox" name="short_url">
+       <widget class="QRadioButton" name="radio_shortlink">
         <property name="text">
-         <string>Short Url</string>
+         <string>Copy short link (db.tt)</string>
         </property>
        </widget>
       </item>
