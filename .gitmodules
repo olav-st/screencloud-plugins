@@ -16,33 +16,24 @@
 [submodule "dropbox/deps/dropbox-sdk-python"]
 	path = dropbox/deps/dropbox-sdk-python
 	url = https://github.com/dropbox/dropbox-sdk-python.git
-[submodule "dropbox/deps/python-six"]
-	path = dropbox/deps/python-six
-	url = https://github.com/benjaminp/six.git
 [submodule "dropbox/deps/requests"]
 	path = dropbox/deps/requests
 	url = https://github.com/kennethreitz/requests.git
 [submodule "dropbox/deps/pkg_resources"]
 	path = dropbox/deps/pkg_resources
 	url = https://github.com/pypa/pkg_resources
-[submodule "dropbox/deps/typing"]
-	path = dropbox/deps/typing
-	url = https://github.com/python/typing.git
+[submodule "dropbox/deps/packaging"]
+	path = dropbox/deps/packaging
+	url = https://github.com/pypa/packaging.git
+[submodule "dropbox/deps/idna"]
+	path = dropbox/deps/idna
+	url = https://github.com/kjd/idna.git
 [submodule "dropbox/deps/chardet"]
 	path = dropbox/deps/chardet
 	url = https://github.com/chardet/chardet.git
 [submodule "dropbox/deps/python-certifi"]
 	path = dropbox/deps/python-certifi
 	url = https://github.com/certifi/python-certifi.git
-[submodule "dropbox/deps/idna"]
-	path = dropbox/deps/idna
-	url = https://github.com/kjd/idna.git
-[submodule "dropbox/deps/appdirs"]
-	path = dropbox/deps/appdirs
-	url = https://github.com/ActiveState/appdirs.git
-[submodule "dropbox/deps/packaging"]
-	path = dropbox/deps/packaging
-	url = https://github.com/pypa/packaging.git
 [submodule "dropbox/deps/pyparsing"]
 	path = dropbox/deps/pyparsing
 	url = https://github.com/pyparsing/pyparsing.git
@@ -61,6 +52,18 @@
 [submodule "sftp/deps/six"]
 	path = sftp/deps/six
 	url = https://github.com/benjaminp/six.git
+[submodule "dropbox/deps/appdirs"]
+	path = dropbox/deps/appdirs
+	url = https://github.com/ActiveState/appdirs.git
+[submodule "sftp/deps/cryptography"]
+	path = sftp/deps/cryptography
+	url = https://github.com/pyca/cryptography.git
 [submodule "sftp/deps/asn1crypto"]
 	path = sftp/deps/asn1crypto
 	url = https://github.com/wbond/asn1crypto.git
+[submodule "sftp/deps/bcrypt"]
+	path = sftp/deps/bcrypt
+	url = https://github.com/pyca/bcrypt.git
+[submodule "dropbox/deps/six"]
+	path = dropbox/deps/six
+	url = https://github.com/benjaminp/six.git

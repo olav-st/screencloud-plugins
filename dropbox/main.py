@@ -52,8 +52,9 @@ class DropboxUploader():
 			self.settingsDialog.group_name.setEnabled(True)
 			self.settingsDialog.group_clipboard.setEnabled(True)
 
+		self.settingsDialog.group_clipboard.radio_shortlink.setChecked(self.copy_shortlink)
 		self.settingsDialog.group_clipboard.radio_publiclink.setChecked(self.copy_link)
-		self.settingsDialog.group_clipboard.radio_dontcopy.setChecked(not self.copy_link)
+		self.settingsDialog.group_clipboard.radio_dontcopy.setChecked(not self.copy_link and not self.copy_shortlink)
 		self.settingsDialog.group_name.input_nameFormat.setText(self.nameFormat)
 		self.settingsDialog.adjustSize()
 
@@ -64,6 +65,7 @@ class DropboxUploader():
 		self.access_token = settings.value("access-token", "")
 		self.user_id = settings.value("user-id", "")
 		self.display_name = settings.value("display-name", "")
+		self.copy_shortlink = settings.value("copy-shortlink", "true") in ['true', True]
 		self.copy_link = settings.value("copy-link", "true") in ['true', True]
 		self.nameFormat = settings.value("name-format", "Screenshot at %H-%M-%S")
 		settings.endGroup()
@@ -76,8 +78,10 @@ class DropboxUploader():
 		settings.setValue("access-token", self.access_token)
 		settings.setValue("user-id", self.user_id)
 		settings.setValue("display-name", self.display_name)
+		settings.setValue("copy-shortlink", self.settingsDialog.group_clipboard.radio_shortlink.checked)
 		settings.setValue("copy-link", self.settingsDialog.group_clipboard.radio_publiclink.checked)
 		settings.setValue("name-format", self.settingsDialog.group_name.input_nameFormat.text)
+		settings.setValue("")
 		settings.endGroup()
 		settings.endGroup()
 	
@@ -102,12 +106,15 @@ class DropboxUploader():
 		screenshot.save(QFile(tmpFilename), ScreenCloud.getScreenshotFormat())
 
 		f = open(tmpFilename, 'rb')
-		response = self.client.files_upload(f, '/' + ScreenCloud.formatFilename(name))
+		response = self.client.files_upload(f.read(), '/' + ScreenCloud.formatFilename(name))
 		f.close()
 		os.remove(tmpFilename)
 		if self.copy_link:
-			share = self.client.sharing_create_shared_link('/' + ScreenCloud.formatFilename(name), short_url=True)
-			ScreenCloud.setUrl(share.url)
+			share = self.client.sharing_create_shared_link('/' + ScreenCloud.formatFilename(name), short_url=self.copy_shortlink)
+			if self.copy_shortlink == False: # generate direct link
+				ScreenCloud.setUrl('https://dl.dropboxusercontent' + share.url[19:-5])
+			else:
+				ScreenCloud.setUrl(share.url)
 
 		return True
 
