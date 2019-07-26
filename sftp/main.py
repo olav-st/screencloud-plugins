@@ -26,6 +26,8 @@ class SFTPUploader():
 		self.settingsDialog = self.uil.load(QFile(workingDir + "/settings.ui"), parentWidget)
 		self.settingsDialog.group_server.combo_auth.connect("currentIndexChanged(QString)", self.authMethodChanged)
 		self.settingsDialog.group_server.button_browse.connect("clicked()", self.browseForKeyfile)
+		self.settingsDialog.group_location.input_url.connect("textChanged(QString)", self.urlFormatEdited)
+		self.settingsDialog.group_location.checkbox_url_extension.connect("stateChanged(int)", self.urlExtensionEdited)
 		self.settingsDialog.group_location.input_name.connect("textChanged(QString)", self.nameFormatEdited)
 		self.settingsDialog.connect("accepted()", self.saveSettings)
 		self.loadSettings()
@@ -37,8 +39,9 @@ class SFTPUploader():
 		self.settingsDialog.group_server.input_keyfile.text = self.keyfile
 		self.settingsDialog.group_server.input_passphrase.text = self.passphrase
 		self.settingsDialog.group_location.input_folder.text = self.folder
-		self.settingsDialog.group_location.input_url.text = self.url
 		self.settingsDialog.group_location.input_name.text = self.nameFormat
+		self.settingsDialog.group_location.checkbox_url_extension.checked = self.urlExtension
+		self.settingsDialog.group_location.input_url.text = self.url
 		self.settingsDialog.group_server.combo_auth.setCurrentIndex(self.settingsDialog.group_server.combo_auth.findText(self.authMethod))
 		self.settingsDialog.open()
 
@@ -53,6 +56,7 @@ class SFTPUploader():
 		self.keyfile = settings.value("keyfile", "")
 		self.passphrase = settings.value("passphrase", "")
 		self.url = settings.value("url", "")
+		self.urlExtension = settings.value("url-extension", "true") == "true"
 		self.folder = settings.value("folder", "")
 		self.nameFormat = settings.value("name-format", "Screenshot at %H-%M-%S")
 		self.authMethod = settings.value("auth-method", "Password")
@@ -70,6 +74,7 @@ class SFTPUploader():
 		settings.setValue("keyfile", self.settingsDialog.group_server.input_keyfile.text)
 		settings.setValue("passphrase", self.settingsDialog.group_server.input_passphrase.text)
 		settings.setValue("url", self.settingsDialog.group_location.input_url.text)
+		settings.setValue("url-extension", self.settingsDialog.group_location.checkbox_url_extension.isChecked())
 		settings.setValue("folder", self.settingsDialog.group_location.input_folder.text)
 		settings.setValue("name-format", self.settingsDialog.group_location.input_name.text)
 		settings.setValue("auth-method", self.settingsDialog.group_server.combo_auth.currentText)
@@ -156,7 +161,12 @@ class SFTPUploader():
 			return False
 		sock.close()
 		if self.url:
-			ScreenCloud.setUrl(self.url + ScreenCloud.formatFilename(name))
+			url = self.url + ScreenCloud.formatFilename(name)
+			if not self.urlExtension:
+				last_dot = url.rfind(".")
+				if last_dot != -1:
+					url = url[:last_dot]
+			ScreenCloud.setUrl(url)
 		return True
 
 	def authMethodChanged(self, method):
@@ -168,5 +178,17 @@ class SFTPUploader():
 		if filename:
 			self.settingsDialog.group_server.input_keyfile.setText(filename)
 
+	def urlFormatEdited(self, urlFormat):
+		url = urlFormat + self.settingsDialog.group_location.label_name_example.text
+		if not self.settingsDialog.group_location.checkbox_url_extension.isChecked():
+			last_dot = url.rfind(".")
+			if last_dot != -1:
+				url = url[:last_dot]
+		self.settingsDialog.group_location.label_url_example.setText(url)
+	
+	def urlExtensionEdited(self, urlExtension):
+		self.urlFormatEdited(self.settingsDialog.group_location.input_url.text)
+
 	def nameFormatEdited(self, nameFormat):
-		self.settingsDialog.group_location.label_example.setText(ScreenCloud.formatFilename(nameFormat))
+		self.settingsDialog.group_location.label_name_example.setText(ScreenCloud.formatFilename(nameFormat))
+		self.urlFormatEdited(self.settingsDialog.group_location.input_url.text)

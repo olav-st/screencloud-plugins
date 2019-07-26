@@ -165,34 +165,6 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="input_name">
-        <property name="text">
-         <string extracomment="Hlap"/>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_result">
-        <property name="text">
-         <string>Result:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QLabel" name="label_example">
-        <property name="text">
-         <string>ex</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_name">
-        <property name="text">
-         <string>Name:</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_url">
         <property name="text">
@@ -204,6 +176,62 @@
        <widget class="QLineEdit" name="input_url">
         <property name="placeholderText">
          <string>Example: http://example.com/imgs/</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="checkbox_url_extension">
+        <property name="checked">
+         <bool>True</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="label_url_extension">
+        <property name="text">
+         <string>Include file extension in URL</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_url_result">
+        <property name="text">
+         <string>URL result:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="label_url_example">
+        <property name="text">
+         <string>ex</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_name">
+        <property name="text">
+         <string>Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="input_name">
+        <property name="text">
+         <string extracomment="Hlap"/>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_name_result">
+        <property name="text">
+         <string>Name result:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLabel" name="label_name_example">
+        <property name="text">
+         <string>ex</string>
         </property>
        </widget>
       </item>
