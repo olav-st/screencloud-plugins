@@ -1,1 +1,0 @@
-../deps/appdirs/appdirs.py
