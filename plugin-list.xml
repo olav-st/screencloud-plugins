@@ -7,9 +7,9 @@
         <author>Olav Sortland Thoresen</author>
         <version>1.10</version>
         <category>online</category>
-        <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/dropbox/icon.png</icon>
-        <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
-        <download>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/dropbox/current.zip</download>
+        <icon>https://raw.githubusercontent.com/olav-st/screencloud-dropbox/master/icon.png</icon>
+        <weblink>https://github.com/olav-st/screencloud-dropbox</weblink>
+        <download>https://github.com/olav-st/screencloud-dropbox/releases/download/v1.10/v1.10.zip</download>
     </plugin>
     <plugin>
         <name>Imgur</name>
@@ -18,9 +18,9 @@
         <author>Olav Sortland Thoresen</author>
         <version>1.9</version>
         <category>online</category>
-        <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/imgur/icon.png</icon>
-        <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
-        <download>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/imgur/current.zip</download>
+        <icon>https://raw.githubusercontent.com/olav-st/screencloud-imgur/master/icon.png</icon>
+        <weblink>https://github.com/olav-st/screencloud-imgur</weblink>
+        <download>https://github.com/olav-st/screencloud-imgur/releases/download/v1.9/v1.9.zip</download>
     </plugin>
     <plugin>
         <name>FTP</name>
@@ -29,9 +29,9 @@
         <author>Olav Sortland Thoresen</author>
         <version>1.4</version>
         <category>online</category>
-        <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/ftp/icon.png</icon>
-        <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
-        <download>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/ftp/current.zip</download>
+        <icon>https://raw.githubusercontent.com/olav-st/screencloud-ftp/master/icon.png</icon>
+        <weblink>https://github.com/olav-st/screencloud-ftp</weblink>
+        <download>https://github.com/olav-st/screencloud-ftp/releases/download/v1.4/v1.4.zip</download>
     </plugin>
     <plugin>
         <name>SFTP</name>
@@ -40,9 +40,9 @@
         <author>Olav Sortland Thoresen</author>
         <version>1.7</version>
         <category>online</category>
-        <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/sftp/icon.png</icon>
-        <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
-        <download>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/sftp/current.zip</download>
+        <icon>https://raw.githubusercontent.com/olav-st/screencloud-sftp/master/icon.png</icon>
+        <weblink>https://github.com/olav-st/screencloud-sftp</weblink>
+        <download>https://github.com/olav-st/screencloud-sftp/releases/download/v1.7/v1.7.zip</download>
     </plugin>
     <plugin>
         <name>Shell Script</name>
@@ -51,8 +51,8 @@
         <author>Olav Sortland Thoresen</author>
         <version>1.5</version>
         <category>local</category>
-        <icon>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/shell/icon.png</icon>
-        <weblink>https://github.com/olav-st/screencloud-plugins</weblink>
-        <download>https://raw.githubusercontent.com/olav-st/screencloud-plugins/master/shell/current.zip</download>
+        <icon>https://raw.githubusercontent.com/olav-st/screencloud-shellscript/master/icon.png</icon>
+        <weblink>https://github.com/olav-st/screencloud-shellscript</weblink>
+        <download>https://github.com/olav-st/screencloud-shellscript/releases/download/v1.5/v1.5.zip</download>
     </plugin>
 </plugins>
