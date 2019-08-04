@@ -1,4 +1,4 @@
-# screencloud-plugins [![Build Status](https://travis-ci.org/olav-st/screencloud-plugins.svg)](https://travis-ci.org/olav-st/screencloud-plugins)
+# screencloud-plugins
 
 List of plugins for ScreenCloud. The file `plugin-list.xml` contains metadata about the plugins as well as a download link.
 
