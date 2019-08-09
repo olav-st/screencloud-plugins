@@ -66,4 +66,15 @@
         <weblink>https://github.com/olav-st/screencloud-shellscript</weblink>
         <download>https://github.com/olav-st/screencloud-shellscript/releases/download/v1.5/v1.5.zip</download>
     </plugin>
+    <plugin>
+        <name>Lutim (framapic/...)</name>
+        <shortname>lutim</shortname>
+        <description>Upload to your Lutim instance</description>
+        <author>Thor77</author>
+        <version>2.1.0</version>
+        <category>online</category>
+        <icon>https://github.com/Thor77/screencloud-lutim/raw/master/icon.png</icon>
+        <weblink>https://github.com/Thor77/screencloud-lutim</weblink>
+        <download>https://github.com/Thor77/screencloud-lutim/releases/download/v2.1.0/current.zip</download>
+    </plugin>    
 </plugins>
