@@ -27,11 +27,11 @@
         <shortname>imgur</shortname>
         <description>Upload to imgur.com</description>
         <author>Olav Sortland Thoresen</author>
-        <version>1.9</version>
+        <version>1.10</version>
         <category>online</category>
         <icon>https://raw.githubusercontent.com/olav-st/screencloud-imgur/master/icon.png</icon>
         <weblink>https://github.com/olav-st/screencloud-imgur</weblink>
-        <download>https://github.com/olav-st/screencloud-imgur/releases/download/v1.9/v1.9.zip</download>
+        <download>https://github.com/olav-st/screencloud-imgur/releases/download/v1.10/v1.10.zip</download>
     </plugin>
     <plugin>
         <name>FTP</name>
