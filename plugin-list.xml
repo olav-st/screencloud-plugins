@@ -67,7 +67,7 @@
         <download>https://github.com/olav-st/screencloud-shellscript/releases/download/v1.5/v1.5.zip</download>
     </plugin>
     <plugin>
-        <name>Lutim (framapic/...)</name>
+        <name>Lutim</name>
         <shortname>lutim</shortname>
         <description>Upload to your Lutim instance</description>
         <author>Thor77</author>
