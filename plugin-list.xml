@@ -60,11 +60,11 @@
         <shortname>sftp</shortname>
         <description>Upload to a secure SFTP server</description>
         <author>Olav Sortland Thoresen</author>
-        <version>1.7</version>
+        <version>1.8</version>
         <category>online</category>
         <icon>https://raw.githubusercontent.com/olav-st/screencloud-sftp/master/icon.png</icon>
         <weblink>https://github.com/olav-st/screencloud-sftp</weblink>
-        <download>https://github.com/olav-st/screencloud-sftp/releases/download/v1.7/v1.7.zip</download>
+        <download>https://github.com/olav-st/screencloud-sftp/releases/download/v1.8/v1.8.zip</download>
     </plugin>
     <plugin>
         <name>Shell Script</name>
