@@ -16,11 +16,11 @@
         <shortname>googledrive</shortname>
         <description>Upload to a folder in your Google Drive</description>
         <author>Olav Sortland Thoresen</author>
-        <version>1.3</version>
+        <version>1.4</version>
         <category>online</category>
         <icon>https://raw.githubusercontent.com/olav-st/screencloud-googledrive/master/icon.png</icon>
         <weblink>https://github.com/olav-st/screencloud-googledrive</weblink>
-        <download>https://github.com/olav-st/screencloud-googledrive/releases/download/v1.3/v1.3.zip</download>
+        <download>https://github.com/olav-st/screencloud-googledrive/releases/download/v1.4/v1.4.zip</download>
     </plugin>
     <plugin>
         <name>Imgur</name>
